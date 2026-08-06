@@ -1,0 +1,41 @@
+---
+/**
+ * LayoutEditorial.astro — Layout editorial padrão
+ *
+ * Usado por: Home, Sobre, Contato, Currículo.
+ * Inclui: Header, Sidebar, Footer, conteúdo principal.
+ *
+ * Estrutura:
+ * LayoutBase
+ *   └── LayoutEditorial
+ *         ├── Header (navegação principal)
+ *         ├── main
+ *         │    └── slot (conteúdo da página)
+ *         └── Footer
+ */
+
+import LayoutBase from './LayoutBase.astro';
+import type { SEOMeta } from '@types/seo';
+import type { Locale } from '@config/site';
+
+interface Props {
+  seo: SEOMeta;
+  locale?: Locale;
+}
+
+const { seo, locale = 'pt' } = Astro.props;
+---
+
+<LayoutBase seo={seo} locale={locale}>
+  <slot name="head" slot="head" />
+
+  <!-- Header — implementado na Etapa 4 -->
+  <!-- <Header locale={locale} /> -->
+
+  <main id="main-content" tabindex="-1">
+    <slot />
+  </main>
+
+  <!-- Footer — implementado na Etapa 4 -->
+  <!-- <Footer locale={locale} /> -->
+</LayoutBase>

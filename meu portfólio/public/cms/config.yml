@@ -1,0 +1,170 @@
+backend:
+  name: github
+  repo: hartmanortiz/portfolio
+  branch: main
+  commit_messages:
+    create: "cms: criar {{collection}} {{slug}}"
+    update: "cms: atualizar {{collection}} {{slug}}"
+    delete: "cms: remover {{collection}} {{slug}}"
+    uploadMedia: "cms: enviar mídia {{path}}"
+    deleteMedia: "cms: remover mídia {{path}}"
+
+# Publicação via GitHub — sem servidor
+publish_mode: editorial_workflow
+
+# Pasta de mídia
+media_folder: public/media/images
+public_folder: /media/images
+
+# Interface
+locale: pt
+
+# ─── Coleções ─────────────────────────────────────────────────────────────────
+
+collections:
+  # ─── Projetos ────────────────────────────────────────────────────────────────
+  - name: projects
+    label: Projetos
+    label_singular: Projeto
+    folder: src/content/projects
+    create: true
+    slug: "{{year}}-{{slug}}"
+    preview_path: "/arquivo/{{fields.slug}}"
+    fields:
+      - { label: Título, name: title, widget: string }
+      - { label: Subtítulo, name: subtitle, widget: string }
+      - { label: Resumo, name: summary, widget: text, hint: "Máximo 300 caracteres" }
+      - { label: Slug (URL), name: slug, widget: string, pattern: ['^[a-z0-9-]+$', "Apenas letras minúsculas, números e hífens"] }
+      - { label: Idioma, name: locale, widget: select, options: [{ label: Português, value: pt }, { label: English, value: en }], default: pt }
+      - label: Categorias
+        name: categories
+        widget: select
+        multiple: true
+        options:
+          - Direção de Arte
+          - Cinema
+          - Fotografia
+          - Pesquisa
+          - Instalações
+          - Produção
+          - Documentário
+          - Videoclipe
+          - Espetáculo
+          - Infância
+          - Universidade
+          - Editais
+      - { label: Data, name: date, widget: datetime, format: "YYYY-MM-DD" }
+      - label: Capa
+        name: cover
+        widget: object
+        fields:
+          - { label: Imagem, name: src, widget: image }
+          - { label: Descrição (alt), name: alt, widget: string }
+          - { label: Legenda, name: caption, widget: string, required: false }
+          - { label: Autor da Foto, name: author, widget: string, required: false }
+      - { label: Publicado, name: published, widget: boolean, default: false }
+      - { label: Tags, name: tags, widget: list, required: false }
+      - { label: Contexto, name: context, widget: markdown, required: false }
+      - { label: Problema, name: problem, widget: markdown, required: false }
+      - { label: Pesquisa, name: research, widget: markdown, required: false }
+      - { label: Referências, name: references, widget: markdown, required: false }
+      - label: Moodboard
+        name: moodboard
+        widget: list
+        required: false
+        fields:
+          - { label: Imagem, name: src, widget: image }
+          - { label: Alt, name: alt, widget: string }
+          - { label: Legenda, name: caption, widget: string, required: false }
+      - label: Galeria
+        name: gallery
+        widget: list
+        required: false
+        fields:
+          - { label: Imagem, name: src, widget: image }
+          - { label: Alt, name: alt, widget: string }
+          - { label: Legenda, name: caption, widget: string, required: false }
+          - { label: Autor, name: author, widget: string, required: false }
+      - label: Vídeos
+        name: videos
+        widget: list
+        required: false
+        fields:
+          - { label: URL, name: url, widget: string }
+          - { label: Plataforma, name: platform, widget: select, options: [youtube, vimeo] }
+          - { label: Título, name: title, widget: string, required: false }
+          - { label: Thumbnail, name: thumbnail, widget: string, required: false }
+      - { label: Processo, name: process, widget: markdown, required: false }
+      - { label: Ficha Técnica, name: technicalSheet, widget: text, required: false }
+      - label: Créditos
+        name: credits
+        widget: list
+        required: false
+        fields:
+          - { label: Função, name: role, widget: string }
+          - { label: Nome, name: name, widget: string }
+          - { label: Link, name: link, widget: string, required: false }
+      - label: Referências Bibliográficas
+        name: bibliography
+        widget: list
+        required: false
+        fields:
+          - { label: Autores, name: authors, widget: string }
+          - { label: Título, name: title, widget: string }
+          - { label: Ano, name: year, widget: number, required: false }
+          - { label: Editora, name: publisher, widget: string, required: false }
+          - { label: URL, name: url, widget: string, required: false }
+          - { label: Tipo, name: type, widget: select, options: [book, article, film, website, other] }
+      - { label: Texto Principal, name: body, widget: markdown }
+      - label: SEO
+        name: seo
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { label: Título SEO, name: title, widget: string, required: false }
+          - { label: Descrição, name: description, widget: text, required: false }
+          - { label: Imagem OG, name: ogImage, widget: image, required: false }
+          - { label: Keywords, name: keywords, widget: list, required: false }
+
+  # ─── Fotografia ──────────────────────────────────────────────────────────────
+  - name: photography
+    label: Fotografia
+    label_singular: Série Fotográfica
+    folder: src/content/photography
+    create: true
+    fields:
+      - { label: Título, name: title, widget: string }
+      - { label: Idioma, name: locale, widget: select, options: [{ label: Português, value: pt }, { label: English, value: en }], default: pt }
+      - { label: Data, name: date, widget: datetime, format: "YYYY-MM-DD" }
+      - label: Capa
+        name: cover
+        widget: object
+        fields:
+          - { label: Imagem, name: src, widget: image }
+          - { label: Alt, name: alt, widget: string }
+      - { label: Publicado, name: published, widget: boolean, default: false }
+      - label: Imagens
+        name: images
+        widget: list
+        required: false
+        fields:
+          - { label: Imagem, name: src, widget: image }
+          - { label: Alt, name: alt, widget: string }
+          - { label: Legenda, name: caption, widget: string, required: false }
+          - { label: Autor, name: author, widget: string, required: false }
+      - { label: Texto, name: body, widget: markdown, required: false }
+
+  # ─── Pesquisa ─────────────────────────────────────────────────────────────────
+  - name: research
+    label: Pesquisa
+    label_singular: Texto de Pesquisa
+    folder: src/content/research
+    create: true
+    fields:
+      - { label: Título, name: title, widget: string }
+      - { label: Idioma, name: locale, widget: select, options: [{ label: Português, value: pt }, { label: English, value: en }], default: pt }
+      - { label: Data, name: date, widget: datetime, format: "YYYY-MM-DD" }
+      - { label: Publicado, name: published, widget: boolean, default: false }
+      - { label: Tags, name: tags, widget: list, required: false }
+      - { label: Texto, name: body, widget: markdown }

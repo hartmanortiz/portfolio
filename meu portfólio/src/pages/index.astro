@@ -1,0 +1,34 @@
+---
+/**
+ * index.astro — Home (PT-BR)
+ *
+ * Rota: /
+ * Layout: LayoutLanding
+ * Conteúdo: implementado na Etapa 5
+ *
+ * Estrutura prevista (doc 3, seção 11):
+ * 1. Hero editorial com projeto em destaque
+ * 2. Sequência de projetos recentes
+ * 3. Breve apresentação
+ * 4. Projetos em destaque
+ * 5. Categorias
+ * 6. Linha do tempo
+ * 7. Fotografia em destaque
+ * 8. Contato
+ * 9. Rodapé
+ */
+
+import LayoutLanding from '@layouts/LayoutLanding.astro';
+import { SITE } from '@config/site';
+
+const seo = {
+  title: 'Arquivo Vivo',
+  description: SITE.description,
+  locale: 'pt-BR',
+};
+---
+
+<LayoutLanding seo={seo} locale="pt">
+  <!-- Conteúdo implementado na Etapa 5 -->
+  <p>Home PT — em construção</p>
+</LayoutLanding>

@@ -1,0 +1,23 @@
+---
+/**
+ * index.astro — Home (EN)
+ *
+ * Rota: /en
+ * Layout: LayoutLanding
+ * Conteúdo: implementado na Etapa 5
+ */
+
+import LayoutLanding from '@layouts/LayoutLanding.astro';
+import { SITE } from '@config/site';
+
+const seo = {
+  title: 'Living Archive',
+  description: 'Digital editorial platform documenting creative processes. Art direction, cinema, photography, research and performing arts.',
+  locale: 'en-US',
+};
+---
+
+<LayoutLanding seo={seo} locale="en">
+  <!-- Conteúdo implementado na Etapa 5 -->
+  <p>Home EN — under construction</p>
+</LayoutLanding>

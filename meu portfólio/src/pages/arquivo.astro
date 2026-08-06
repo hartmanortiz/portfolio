@@ -1,0 +1,24 @@
+---
+/**
+ * arquivo.astro — Arquivo de projetos (PT-BR)
+ *
+ * Rota: /arquivo
+ * Layout: LayoutArchive
+ * Conteúdo: implementado na Etapa 5
+ *
+ * Eixo principal do site: reúne todos os projetos
+ * com filtragem por categorias, ano e tags (doc 1, seção 17).
+ */
+
+import LayoutArchive from '@layouts/LayoutArchive.astro';
+
+const seo = {
+  title: 'Arquivo',
+  description: 'Todos os projetos de Hartman Ortiz organizados por categorias, ano e método de trabalho.',
+};
+---
+
+<LayoutArchive seo={seo} locale="pt">
+  <!-- Conteúdo implementado na Etapa 5 -->
+  <p>Arquivo — em construção</p>
+</LayoutArchive>

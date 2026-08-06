@@ -1,0 +1,21 @@
+---
+/**
+ * direcao-de-arte.astro — Direção de Arte (PT-BR)
+ *
+ * Rota: /direcao-de-arte
+ * Layout: LayoutArchive (filtrado por categoria "Direção de Arte")
+ * Conteúdo: implementado na Etapa 5
+ */
+
+import LayoutArchive from '@layouts/LayoutArchive.astro';
+
+const seo = {
+  title: 'Direção de Arte',
+  description: 'Projetos de direção de arte: cenografia, pesquisa visual, concepção e desenvolvimento estético.',
+};
+---
+
+<LayoutArchive seo={seo} locale="pt" activeCategory="Direção de Arte">
+  <!-- Conteúdo implementado na Etapa 5 -->
+  <p>Direção de Arte — em construção</p>
+</LayoutArchive>

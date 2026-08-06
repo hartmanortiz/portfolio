@@ -1,0 +1,44 @@
+---
+/**
+ * LayoutProject.astro — Layout de estudo de caso
+ *
+ * Usado por: páginas de projeto individuais.
+ * Inclui: Header, navegação interna do projeto, breadcrumb, footer.
+ * Suporta blocos modulares configuráveis (doc 3, seção 12).
+ */
+
+import LayoutBase from './LayoutBase.astro';
+import type { SEOMeta } from '@types/seo';
+import type { Locale } from '@config/site';
+
+interface Props {
+  seo: SEOMeta;
+  locale?: Locale;
+  prevProject?: { title: string; href: string };
+  nextProject?: { title: string; href: string };
+}
+
+const { seo, locale = 'pt', prevProject, nextProject } = Astro.props;
+---
+
+<LayoutBase seo={seo} locale={locale}>
+  <slot name="head" slot="head" />
+
+  <!-- Header — implementado na Etapa 4 -->
+  <!-- <Header locale={locale} /> -->
+
+  <main id="main-content" tabindex="-1">
+    <!-- Breadcrumb — implementado na Etapa 4 -->
+    <!-- <Breadcrumb locale={locale} /> -->
+
+    <article>
+      <slot />
+    </article>
+
+    <!-- Navegação entre projetos — implementado na Etapa 4 -->
+    <!-- <ProjectNavigation prev={prevProject} next={nextProject} locale={locale} /> -->
+  </main>
+
+  <!-- Footer — implementado na Etapa 4 -->
+  <!-- <Footer locale={locale} /> -->
+</LayoutBase>

@@ -1,0 +1,103 @@
+/*
+ * global.css — Estilos globais
+ *
+ * Contém apenas:
+ * - Importação dos tokens Tailwind
+ * - Reset básico
+ * - Variáveis CSS (espelho dos design tokens para uso em CSS puro)
+ * - Estilos de foco global (acessibilidade)
+ * - Preferência de movimento reduzido
+ *
+ * NUNCA adicionar estilos de componente aqui.
+ * Cada componente possui seu próprio arquivo CSS.
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Variáveis CSS ────────────────────────────────────────────────────────── */
+
+:root {
+  /* Cores */
+  --color-ink:         #1a1714;
+  --color-paper:       #f5f0e8;
+  --color-graphite:    #3d3a35;
+  --color-graphite-lt: #6b6560;
+  --color-graphite-mt: #9e9890;
+  --color-crimson:     #8b2020;
+  --color-ember:       #b85c20;
+  --color-ochre:       #b89040;
+
+  /* Tipografia */
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans:  'Inter', system-ui, sans-serif;
+  --font-mono:  'JetBrains Mono', monospace;
+
+  /* Espaçamento */
+  --space-1:   8px;
+  --space-2:  16px;
+  --space-3:  24px;
+  --space-4:  32px;
+  --space-6:  48px;
+  --space-8:  64px;
+  --space-12: 96px;
+  --space-16: 128px;
+
+  /* Animações */
+  --duration-fast:   150ms;
+  --duration-base:   300ms;
+  --duration-slow:   600ms;
+  --ease-editorial:  cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Reset básico ──────────────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-sans);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100dvh;
+  line-height: 1.75;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ─── Foco (Acessibilidade — WCAG AA) ──────────────────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 3px;
+}
+
+/* ─── Preferência de movimento reduzido ─────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

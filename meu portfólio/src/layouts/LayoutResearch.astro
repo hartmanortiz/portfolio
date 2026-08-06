@@ -1,0 +1,39 @@
+---
+/**
+ * LayoutResearch.astro — Layout de pesquisa / texto longo
+ *
+ * Usado por: /pesquisa e textos acadêmicos.
+ * Otimizado para leitura longa: largura de texto confortável,
+ * índice lateral automático, notas de processo.
+ */
+
+import LayoutBase from './LayoutBase.astro';
+import type { SEOMeta } from '@types/seo';
+import type { Locale } from '@config/site';
+
+interface Props {
+  seo: SEOMeta;
+  locale?: Locale;
+}
+
+const { seo, locale = 'pt' } = Astro.props;
+---
+
+<LayoutBase seo={seo} locale={locale}>
+  <slot name="head" slot="head" />
+
+  <!-- Header — implementado na Etapa 4 -->
+  <!-- <Header locale={locale} /> -->
+
+  <div class="research-layout">
+    <!-- Índice automático lateral — implementado na Etapa 4 -->
+    <!-- <TableOfContents /> -->
+
+    <main id="main-content" tabindex="-1">
+      <slot />
+    </main>
+  </div>
+
+  <!-- Footer — implementado na Etapa 4 -->
+  <!-- <Footer locale={locale} /> -->
+</LayoutBase>

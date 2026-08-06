@@ -1,0 +1,34 @@
+---
+/**
+ * [slug].astro — Dynamic project page (EN)
+ *
+ * Route: /en/archive/[slug]
+ * Layout: LayoutProject
+ */
+
+import LayoutProject from '@layouts/LayoutProject.astro';
+import { getPublishedProjects } from '@utils/content';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const projects = await getPublishedProjects('en');
+  return projects.map((project) => ({
+    params: { slug: project.data.slug },
+    props: { project },
+  }));
+};
+
+const { project } = Astro.props;
+const { data } = project;
+
+const seo = {
+  title: data.seo?.title ?? data.title,
+  description: data.seo?.description ?? data.summary,
+  ogImage: data.seo?.ogImage ?? data.cover.src,
+};
+---
+
+<LayoutProject seo={seo} locale="en">
+  <h1>{data.title}</h1>
+  <p>{data.summary}</p>
+</LayoutProject>

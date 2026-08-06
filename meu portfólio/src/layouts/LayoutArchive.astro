@@ -1,0 +1,39 @@
+---
+/**
+ * LayoutArchive.astro — Layout do arquivo / listagem de projetos
+ *
+ * Usado por: /arquivo, /direcao-de-arte, /filmes, /fotografia, /pesquisa.
+ * Inclui: Header, filtros laterais, grid de projetos, Footer.
+ */
+
+import LayoutBase from './LayoutBase.astro';
+import type { SEOMeta } from '@types/seo';
+import type { Locale } from '@config/site';
+
+interface Props {
+  seo: SEOMeta;
+  locale?: Locale;
+  activeCategory?: string;
+}
+
+const { seo, locale = 'pt', activeCategory } = Astro.props;
+---
+
+<LayoutBase seo={seo} locale={locale}>
+  <slot name="head" slot="head" />
+
+  <!-- Header — implementado na Etapa 4 -->
+  <!-- <Header locale={locale} /> -->
+
+  <div class="archive-layout">
+    <!-- Filtros laterais — implementado na Etapa 4 -->
+    <!-- <ArchiveFilters locale={locale} activeCategory={activeCategory} /> -->
+
+    <main id="main-content" tabindex="-1">
+      <slot />
+    </main>
+  </div>
+
+  <!-- Footer — implementado na Etapa 4 -->
+  <!-- <Footer locale={locale} /> -->
+</LayoutBase>

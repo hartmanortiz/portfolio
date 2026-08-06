@@ -1,0 +1,33 @@
+---
+/**
+ * LayoutPhotography.astro — Layout para séries fotográficas
+ *
+ * Usado por: /fotografia e páginas individuais de série fotográfica.
+ * Prioriza imagens grandes com mínimo de interferência tipográfica.
+ */
+
+import LayoutBase from './LayoutBase.astro';
+import type { SEOMeta } from '@types/seo';
+import type { Locale } from '@config/site';
+
+interface Props {
+  seo: SEOMeta;
+  locale?: Locale;
+}
+
+const { seo, locale = 'pt' } = Astro.props;
+---
+
+<LayoutBase seo={seo} locale={locale}>
+  <slot name="head" slot="head" />
+
+  <!-- Header discreto — implementado na Etapa 4 -->
+  <!-- <Header locale={locale} minimal={true} /> -->
+
+  <main id="main-content" tabindex="-1">
+    <slot />
+  </main>
+
+  <!-- Footer — implementado na Etapa 4 -->
+  <!-- <Footer locale={locale} /> -->
+</LayoutBase>
