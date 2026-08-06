@@ -106,114 +106,54 @@ GitHub Pages
 
 # **4\. Estrutura de Pastas**
 
+```text
 portfolio/
-
-│
-
 ├── public/
-
-│ ├── images/
-
-│ ├── icons/
-
-│ ├── fonts/
-
-│ ├── favicons/
-
-│ └── videos/
-
+│   ├── admin/
+│   │   ├── index.html
+│   │   └── config.yml
+│   ├── images/
+│   ├── icons/
+│   ├── fonts/
+│   ├── favicons/
+│   └── videos/
 │
-
 ├── src/
-
-│
-
-├── assets/
-
-│
-
-├── components/
-
-│ ├── ui/
-
-│ ├── editorial/
-
-│ ├── navigation/
-
-│ ├── gallery/
-
-│ ├── typography/
-
-│ ├── seo/
-
-│ ├── forms/
-
-│ ├── motion/
-
-│ └── cms/
-
-│
-
-├── layouts/
-
-│
-
-├── pages/
-
-│
-
-├── content/
-
-│ ├── projects/
-
-│ ├── photography/
-
-│ ├── films/
-
-│ ├── research/
-
-│ ├── about/
-
-│ └── curriculum/
-
-│
-
-├── styles/
-
-│
-
-├── lib/
-
-│
-
-├── utils/
-
-│
-
-├── config/
-
-│
-
-└── types/  
+│   ├── assets/
+│   ├── components/
+│   │   ├── ui/
+│   │   ├── editorial/
+│   │   ├── navigation/
+│   │   ├── gallery/
+│   │   ├── typography/
+│   │   ├── seo/
+│   │   └── motion/
+│   ├── layouts/
+│   ├── pages/
+│   ├── content/
+│   │   ├── projects/
+│   │   ├── photography/
+│   │   ├── films/
+│   │   ├── research/
+│   │   ├── about/
+│   │   └── curriculum/
+│   ├── styles/
+│   ├── tokens/
+│   ├── lib/
+│   ├── utils/
+│   ├── config/
+│   └── types/
+```  
 ---
 
 # **5\. Organização dos Componentes**
 
-Cada componente deverá possuir:
+A organização dos componentes segue as práticas idiomáticas do Astro, evitando arquivos vazios desnecessários:
 
-Component/
+- **Componentes de UI / Atômicos (`ui/`, `typography/`):** Arquivo único auto-contido (`Component.astro`) encapsulando marcação, tipagem TypeScript e scoped CSS / classes utilitárias de tokens.
+- **Componentes Compostos e Editoriais (`editorial/`, `gallery/`, `navigation/`):** Podem conter submódulo TypeScript auxiliar (`Component.ts`), estilos específicos e documentação `README.md` quando a complexidade funcional justificar.
 
-Component.astro
-
-Component.css
-
-Component.ts
-
-index.ts
-
-README.md
-
-Todo componente deve ser documentado.
+Todo componente deve possuir tipagem TypeScript explícita em suas `Props`.
 
 ---
 
@@ -223,48 +163,56 @@ Componentes:
 
 PascalCase
 
-ProjectGallery
+`ProjectGallery.astro`, `EditorialBlock.astro`
 
-Arquivos:
+Arquivos auxiliares e utilitários:
 
 kebab-case
 
-project-gallery.ts
+`project-gallery.ts`, `format-date.ts`
 
 Funções:
 
 camelCase
 
-createProjectCard()
+`createEditorialBlock()`, `getRelatedProjects()`
 
-Tipos:
+Tipos e Interfaces:
 
 PascalCase
 
-ProjectData  
+`ProjectData`, `NavigationItem`  
 ---
 
 # **7\. Sistema de Layouts**
 
-O projeto utilizará layouts independentes.
+O projeto utilizará layouts especializados e modulares:
 
-LayoutBase
+LayoutBase (estrutura HTML global, SEO, fontes, metadados)
 
-LayoutEditorial
+LayoutEditorial (páginas de conteúdo textual longo)
 
-LayoutProject
+LayoutProject (estudos de caso de projetos com timeline e ficha técnica)
 
-LayoutPhotography
+LayoutArchive (índice cronológico e filtrável do acervo)
 
-LayoutResearch
+LayoutPhotography (galerias fotográficas com visualização expandida)
 
-LayoutArchive
+LayoutFilms (grid audiovisual com players embutidos)
 
-LayoutLanding
+LayoutResearch (ensaios acadêmicos, notas e bibliografia)
 
-Cada layout será responsável apenas por estrutura.
+LayoutAbout (apresentação institucional e biografia)
 
-Nunca por conteúdo.
+LayoutCurriculum (trajetória acadêmica, artística e profissional)
+
+LayoutContact (canais de comunicação e agenciamento)
+
+LayoutLanding (página inicial / Home editorial)
+
+Cada layout será responsável apenas por estrutura e composição de casca.
+
+Nunca por regras de negócio de conteúdo.
 
 ---
 
@@ -366,39 +314,35 @@ process.pdf
 
 # **10\. Estrutura de um Projeto**
 
-Título
+Campos tipados no Frontmatter (Zod):
 
-Resumo
+* `title` (Título)
+* `subtitle` (Subtítulo — opcional)
+* `description` (Resumo)
+* `slug` (Identificador de rota)
+* `lang` ('pt' | 'en')
+* `translationKey` (Chave de vinculação bilíngue)
+* `categories` (Array de categorias: Direção de Arte, Cinema, Fotografia, Pesquisa, etc.)
+* `date` (Data do projeto)
+* `cover` (Imagem de capa)
+* `tags` (Array de tags conceituais)
+* `published` (Boolean)
 
-Descrição
+Blocos modulares opcionais (conforme o acervo de cada obra):
 
-Contexto
-
-Problema
-
-Pesquisa
-
-Referências
-
-Moodboard
-
-Processo
-
-Resultado
-
-Galeria
-
-Vídeos
-
-Ficha Técnica
-
-Créditos
-
-Bibliografia
-
-Tags
-
-SEO
+* `context` (Contexto)
+* `problem` (Problema)
+* `research` (Pesquisa)
+* `references` (Referências)
+* `moodboard` (Moodboard)
+* `process` (Processo)
+* `result` (Resultado)
+* `gallery` (Galeria de imagens com legendas)
+* `videos` (Links incorporados YouTube/Vimeo)
+* `technicalSheet` (Ficha Técnica)
+* `credits` (Créditos da equipe)
+* `bibliography` (Bibliografia)
+* `seo` (Metadados customizados de SEO)
 
 Nem todos os projetos precisam utilizar todos os blocos.
 
@@ -406,27 +350,14 @@ Nem todos os projetos precisam utilizar todos os blocos.
 
 # **11\. Modelagem do CMS**
 
-Coleções:
+Coleções estruturadas no Decap CMS (`/admin/config.yml`):
 
-Projetos
-
-Fotografia
-
-Pesquisa
-
-Páginas
-
-Menu
-
-Categorias
-
-Tags
-
-Autores
-
-Idiomas
-
-SEO
+* `projects` (Projetos e Estudos de Caso — PT e EN)
+* `photography` (Ensaios Fotográficos — PT e EN)
+* `films` (Obras Audiovisuais e Vídeos — PT e EN)
+* `research` (Pesquisas, Artigos e Ensaios — PT e EN)
+* `pages` (Páginas institucionais: Sobre, Currículo, Contato)
+* `settings` (Configurações globais, Menu, Taxonomias de Categorias e SEO)
 
 ---
 
@@ -464,17 +395,13 @@ Indexação
 
 Imagens:
 
-WebP
-
-AVIF
+Formatos modernos: WebP e AVIF otimizados.
 
 Vídeos:
 
-YouTube
+Players externos embutidos: YouTube e Vimeo.
 
-Vimeo
-
-Nunca armazenar vídeos grandes no repositório.
+Vídeos pesados nunca serão versionados no repositório Git (apenas micro-animações/loops essenciais em `public/videos/`, caso indispensáveis).
 
 ---
 
@@ -632,37 +559,33 @@ Equipe.
 
 # **22\. Sistema de Tipografia**
 
-A tipografia será controlada por Design Tokens.
+A tipografia será controlada por Design Tokens estruturados:
 
-Nunca utilizar tamanhos fixos espalhados pelo código.
+- Serifada editorial (Títulos, Citações, Introduções, Frases de Destaque).
+- Grotesca contemporânea (Menus, Metadados, Legendas, Rótulos, Interface).
+
+Nunca utilizar tamanhos ou famílias de fontes arbitrárias no código.
 
 ---
 
 # **23\. Sistema de Cores**
 
-Todas as cores deverão existir apenas em:
+Todas as cores deverão existir centralizadas em:
 
-tokens/colors.ts
+`src/tokens/colors.ts` (exportadas também para `tailwind.config.mjs` e CSS Custom Properties).
 
-Nunca utilizar hexadecimal diretamente.
+Paleta base: Preto quente, Papel claro, Cinza grafite, Marrom profundo.
+Destaques: Vermelho queimado, Laranja queimado, Ocre.
+
+Nunca utilizar valores hexadecimais soltos na marcação dos componentes.
 
 ---
 
 # **24\. Espaçamento**
 
-Todo espaçamento será tokenizado.
+Todo espaçamento seguirá rigorosamente a escala de múltiplos de 8px:
 
-Exemplo:
-
-space-xs
-
-space-sm
-
-space-md
-
-space-lg
-
-space-xl
+`space-xs` (8px), `space-sm` (16px), `space-md` (24px), `space-lg` (32px), `space-xl` (48px), `space-2xl` (64px), `space-3xl` (96px), `space-4xl` (128px).
 
 ---
 
@@ -730,27 +653,27 @@ Uso recomendado
 
 Versão 1
 
-Portfólio.
+Portfólio Editorial & Arquivo Vivo de Processos.
 
 Versão 2
 
-Blog.
+Caderno de Ensaios e Pesquisa (Publicações, Artigos e Reflexões Metodológicas).
 
 Versão 3
 
-Área de publicações.
+Área de Catálogos e Publicações Culturais.
 
 Versão 4
 
-Banco de referências.
+Banco de Referências Visuais e Bibliográficas.
 
 Versão 5
 
-Arquivo de pesquisas.
+Acervo Arquivístico de Pesquisa Expandida.
 
 Versão 6
 
-Mapa interativo da trajetória.
+Mapa Interativo da Trajetória e Cronologia Curatorial.
 
 ---
 

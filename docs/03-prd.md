@@ -78,11 +78,11 @@ TypeScript.
 
 ## **Estilização**
 
-Tailwind CSS.
+Tailwind CSS integrado a Design Tokens em TypeScript e CSS Custom Properties (variáveis nativas).
 
-Componentes reutilizáveis.
+Componentes reutilizáveis em Astro com CSS escopado quando necessário.
 
-CSS organizado por módulos.
+Sem uso de estilos genéricos ou bibliotecas de componentes pré-moldados.
 
 ---
 
@@ -118,120 +118,116 @@ Usuário
 
 ↓
 
-Astro
+Astro (Content Collections tipadas com Zod)
 
 ↓
 
-Componentes
+Layouts & Componentes Modulares
 
 ↓
 
-Markdown
+Markdown / MDX (`src/content/`)
 
 ↓
 
-Decap CMS
+Decap CMS (`public/admin/`)
 
 ↓
 
-GitHub
+GitHub (Repositório)
 
 ↓
 
-Deploy automático
+GitHub Actions (Build & Testes)
 
 ↓
 
-GitHub Pages  
+GitHub Pages (Hospedagem Estática)  
 ---
 
 # **6\. Estrutura de Pastas**
 
-src/
+```text
+portfolio/
+├── public/
+│   ├── admin/
+│   │   ├── index.html
+│   │   └── config.yml
+│   ├── images/
+│   ├── icons/
+│   ├── fonts/
+│   ├── favicons/
+│   └── videos/
+│
+├── src/
+│   ├── assets/
+│   ├── components/
+│   │   ├── ui/
+│   │   ├── editorial/
+│   │   ├── navigation/
+│   │   ├── gallery/
+│   │   ├── typography/
+│   │   ├── seo/
+│   │   └── motion/
+│   ├── layouts/
+│   ├── pages/
+│   ├── content/
+│   │   ├── projects/
+│   │   ├── photography/
+│   │   ├── films/
+│   │   ├── research/
+│   │   ├── about/
+│   │   └── curriculum/
+│   ├── styles/
+│   ├── tokens/
+│   ├── lib/
+│   ├── utils/
+│   ├── config/
+│   └── types/
+```
 
-components/
-
-layouts/
-
-pages/
-
-content/
-
-styles/
-
-utils/
-
-public/
-
-content/
-
-projects/
-
-photos/
-
-films/
-
-research/
-
-about/
-
-curriculum/
-
-cms/
-
-config.yml
-
-media/
-
-images/
-
-videos/
-
-documents/
-
-Toda a organização deve favorecer a escalabilidade e a separação clara entre conteúdo, interface e lógica.
+Toda a organização deve favorecer a escalabilidade e a separação clara entre conteúdo (`src/content/`), interface (`src/components/`), layout (`src/layouts/`) e configuração (`src/config/` e `src/tokens/`).
 
 ---
 
 # **7\. Modelo de Conteúdo**
 
-Cada projeto deverá possuir campos estruturados, permitindo consistência entre o CMS e o site.
+Cada projeto deverá possuir campos estruturados, permitindo consistência entre o CMS e o site através de schemas tipados com Zod no Astro.
 
 Campos obrigatórios:
 
-* título;  
-* subtítulo;  
-* resumo;  
-* slug;  
-* idioma;  
-* categoria;  
-* data;  
-* capa;  
-* imagens;  
-* vídeos;  
-* texto principal;  
-* ficha técnica;  
-* créditos;  
-* tags;  
-* status de publicação.
+* título (`title`);  
+* resumo (`description` / `summary`);  
+* slug (`slug`);  
+* idioma (`lang` — 'pt' | 'en');  
+* chave de tradução (`translationKey` — vincula as versões PT e EN correspondentes);  
+* categorias (`categories` — array de categorias, permitindo multi-classificação);  
+* data (`date`);  
+* capa (`cover`);  
+* tags (`tags` — array de strings);  
+* status de publicação (`published` / `draft`).
 
-Campos opcionais:
+Campos opcionais (conteúdo modular — cada projeto inclui apenas o material existente):
 
-* contexto;  
-* problema;  
-* pesquisa;  
-* referências;  
-* moodboard;  
-* storyboard;  
-* protótipos;  
-* bastidores;  
-* processo;  
-* galeria;  
-* links externos;  
-* referências bibliográficas;  
-* anexos;  
-* premiações;  
-* editais relacionados.
+* subtítulo (`subtitle`);  
+* contexto (`context`);  
+* problema (`problem`);  
+* pesquisa (`research`);  
+* referências (`references`);  
+* imagens / galeria (`gallery` — lista de imagens com alt e legenda);  
+* vídeos (`videos` — URLs externas YouTube/Vimeo);  
+* moodboard (`moodboard`);  
+* storyboard (`storyboard`);  
+* protótipos (`prototypes`);  
+* bastidores (`backstage`);  
+* processo (`process`);  
+* ficha técnica (`technicalSheet`);  
+* créditos (`credits`);  
+* referências bibliográficas (`bibliography`);  
+* links externos (`links`);  
+* anexos (`attachments`);  
+* premiações (`awards`);  
+* editais relacionados (`grants`).
 
 ---
 
@@ -395,7 +391,7 @@ Cada projeto poderá utilizar apenas os blocos necessários.
 
 # **13\. Sistema Modular**
 
-Todo o site deverá ser composto por componentes reutilizáveis.
+Todo o site deverá ser composto por componentes reutilizáveis e editoriais.
 
 Exemplos:
 
@@ -407,11 +403,11 @@ ImageGrid
 
 Quote
 
-Timeline
+Timeline / ProcessDiagram
 
 Bibliography
 
-SidebarNote
+SidebarNote / ResearchNotes
 
 Credits
 
@@ -425,9 +421,9 @@ Tag
 
 Filter
 
-Card
+EditorialBlock / ProjectEntry (substitui o conceito de Card tradicional, mantendo estética editorial aberta sem bordas ou sombras pesadas)
 
-ProjectNavigation
+ProjectNavigation / MetadataPanel
 
 Esses componentes deverão aceitar parâmetros configuráveis para evitar duplicação de código.
 
@@ -435,13 +431,13 @@ Esses componentes deverão aceitar parâmetros configuráveis para evitar duplic
 
 # **14\. Busca**
 
-A busca deverá localizar:
+A busca estática indexada deverá localizar:
 
 Título.
 
 Resumo.
 
-Conteúdo.
+Conteúdo textual.
 
 Tags.
 
@@ -451,7 +447,9 @@ Ano.
 
 Tipo de projeto.
 
-Resultados instantâneos.
+Conceitos de pesquisa e metodologia.
+
+Resultados instantâneos gerados no build (Pagefind), sem necessidade de servidor.
 
 ---
 
@@ -575,19 +573,19 @@ Hierarquia semântica correta.
 
 ---
 
-# **20\. Segurança**
+# **20\. Segurança e Autenticação**
 
-Sem autenticação pública.
+Sem autenticação pública para visualização do site.
 
-Painel administrativo protegido.
+Painel administrativo do Decap CMS protegido via fluxo de autenticação GitHub (OAuth PKCE Authorization Flow ou proxy bridge para GitHub Pages).
 
-Deploy automatizado.
+Deploy automatizado via GitHub Actions.
 
 Dependências atualizadas.
 
 Headers de segurança quando suportados pela hospedagem.
 
-Validação de conteúdo no processo de build.
+Validação de schema de conteúdo no processo de build via Zod.
 
 ---
 
@@ -595,7 +593,7 @@ Validação de conteúdo no processo de build.
 
 Integração opcional com:
 
-Google Analytics 4\.
+Google Analytics 4.
 
 Google Search Console.
 
@@ -637,13 +635,13 @@ Sem bloquear interação.
 
 Sem interferir na leitura.
 
-Desativação automática para usuários que preferem menos movimento.
+Desativação automática para usuários que preferem menos movimento (`prefers-reduced-motion`).
 
 ---
 
 # **24\. CMS**
 
-O painel administrativo deverá permitir:
+O painel administrativo do Decap CMS (`/admin/`) deverá permitir:
 
 Criar projeto.
 
@@ -651,21 +649,19 @@ Editar projeto.
 
 Excluir projeto.
 
-Enviar imagens.
+Enviar imagens e gerenciar assets.
 
-Enviar vídeos externos.
+Adicionar links de vídeos externos (YouTube/Vimeo).
 
-Editar páginas.
+Editar páginas institucionais.
 
-Editar traduções.
+Editar traduções em PT-BR e EN (gerenciadas por `translationKey`).
 
-Editar menu.
+Editar menu e navegação.
 
-Editar SEO.
+Editar SEO e metadados.
 
-Gerenciar categorias.
-
-Gerenciar tags.
+Gerenciar categorias e tags.
 
 Visualizar rascunhos antes da publicação.
 
@@ -756,9 +752,9 @@ O projeto será considerado pronto quando:
 
 ---
 
-# **31\. Melhorias que eu acrescentaria**
+# **31\. Melhorias Incorporadas à Especificação**
 
-Há alguns requisitos que considero importantes e que normalmente não aparecem em PRDs de portfólio, mas que seriam muito úteis para o seu caso:
+Requisitos refinados para o contexto de arquivo vivo:
 
 **Sistema de relações entre projetos:** permitir vincular um projeto a outros relacionados ("Veja também"), por tema, técnica ou período.
 
@@ -766,7 +762,7 @@ Há alguns requisitos que considero importantes e que normalmente não aparecem 
 
 **Modo de visualização para editais:** uma opção que reorganize a página destacando objetivos, processo, resultados, ficha técnica e créditos, facilitando o uso do site como material de apoio em avaliações.
 
-**Gerenciamento de mídia:** além do upload, o CMS deve gerar automaticamente diferentes tamanhos de imagem, definir textos alternativos obrigatórios e permitir legendas e créditos de autoria.
+**Gerenciamento de mídia:** além do upload, o sistema deve gerar automaticamente diferentes resoluções de imagem em WebP/AVIF, definir textos alternativos obrigatórios e permitir legendas e créditos de autoria.
 
-**Busca semântica:** além da busca por palavras, permitir localizar projetos por conceitos como "pesquisa", "infância", "cenografia" ou "materialidade", reforçando a ideia de arquivo.
+**Busca estática enriquecida por conceitos:** localização rápida de projetos por conceitos metodológicos como "pesquisa", "infância", "cenografia" ou "materialidade", via metadados estruturados e indexação estática leve (Pagefind), sem sobrecarga de servidores.
 

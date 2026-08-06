@@ -194,7 +194,7 @@ Video Block.
 
 Notes.
 
-Cards.
+EditorialBlock / ProjectEntry.
 
 Credits.
 
