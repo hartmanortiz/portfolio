@@ -10,7 +10,7 @@ Versão 1.0
 
 # **1\. Visão do Produto**
 
-O produto consiste em uma plataforma digital bilíngue destinada à apresentação da trajetória profissional, artística e acadêmica de Hartman Ortiz.
+O produto consiste em uma plataforma digital em língua portuguesa destinada à apresentação da trajetória profissional, artística e acadêmica de Hartman Ortiz.
 
 O site não tem como objetivo principal funcionar como um currículo online ou uma vitrine de trabalhos. Sua função é documentar processos criativos, evidenciar a metodologia de trabalho do autor e estabelecer sua credibilidade perante instituições culturais, pesquisadores, curadores, produtoras, clientes e comissões de avaliação.
 
@@ -269,27 +269,17 @@ Experimentação.
 
 # **17\. Arquitetura da Informação**
 
-A estrutura inicial será composta pelas seguintes áreas:
+A estrutura é composta por páginas dedicadas e independentes:
 
-Home.
-
-Sobre.
-
-Arquivo.
-
-Direção de Arte.
-
-Filmes.
-
-Fotografia.
-
-Pesquisa.
-
-Currículo.
-
-Contato.
-
-A seção "Arquivo" funcionará como eixo principal do site, reunindo todos os projetos e permitindo filtragem por categorias e temas.
+* **Home:** Apresentação conceitual com destaque editorial para a obra de abertura (*Instalações Dançantes*) e síntese curatorial.
+* **Sobre:** Biografia, posicionamento, manifesto e metodologia do autor.
+* **Arquivo:** Eixo central do site, reunindo todo o acervo cronológico de obras com filtros avançados.
+* **Direção de Arte:** Página independente com seleção e textos curatoriais de direção de arte e cenografia.
+* **Filmes:** Página independente com obras audiovisuais, curtas, videoclipes e documentários.
+* **Fotografia:** Página independente com ensaios fotográficos e pesquisa visual de luz/composição.
+* **Pesquisa:** Página independente dedicada a investigações acadêmicas, ensaios e textos teóricos.
+* **Currículo:** Trajetória cronológica, formação acadêmica, prêmios, editais e realizações profissionais.
+* **Contato:** Canais diretos de comunicação, redes institucionais e agenciamento.
 
 ---
 
@@ -318,9 +308,9 @@ A estrutura poderá variar conforme a disponibilidade de material, mas sempre qu
 
 O produto deverá ser escalável.
 
-Novos projetos poderão ser publicados sem alterar a estrutura do site.
+Novos projetos poderão ser publicados adicionando novos arquivos Markdown/MDX e assets diretamente no repositório Git, sem necessidade de alterar o código da aplicação.
 
-O CMS deverá permitir expansão contínua do acervo.
+A arquitetura no GitHub Pages e Astro garante publicação estática rápida, segura e sem custo de infraestrutura.
 
 ---
 

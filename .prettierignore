@@ -1,0 +1,8 @@
+# Dependencies & Build
+node_modules/
+dist/
+.astro/
+
+# Raw Content & Documentation
+docs/
+content-assets/

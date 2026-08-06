@@ -48,7 +48,7 @@ Diretor de Arte Digital
 
 Especialista em Motion Design
 
-Especialista em CMS
+Especialista em Arquitetura de Conteúdo e Markdown
 
 ---
 
@@ -132,15 +132,13 @@ Pastas.
 
 Componentes.
 
-Rotas.
+Rotas independentes (`/`, `/sobre`, `/arquivo`, `/direcao-de-arte`, `/filmes`, `/fotografia`, `/pesquisa`, `/curriculo`, `/contato`, `/projetos/[slug]`).
 
-CMS.
+Content Collections tipadas com Zod.
 
-Conteúdo.
+Sistema de Assets (`src/assets/`).
 
-Internacionalização.
-
-SEO.
+SEO e Metadados.
 
 Esperar aprovação.
 
@@ -174,31 +172,33 @@ Esperar aprovação.
 
 Criar componentes.
 
-Header.
+Sidebar (desktop).
+
+MenuDrawer (gaveta editorial em tela cheia para mobile).
+
+Header / Topbar de leitura.
 
 Footer.
 
-Sidebar.
-
 Buttons.
 
-Gallery.
+Gallery & ImageGrid.
 
-Hero.
+Hero editorial.
 
-Timeline.
+Timeline & ProcessDiagram.
 
-Image Grid.
+LiteEmbed (vídeos sob demanda de alta performance).
 
-Video Block.
+EditalToggle (alternador de Modo Edital / Visualização Sintetizada).
 
-Notes.
+Notes & ResearchNotes.
 
 EditorialBlock / ProjectEntry.
 
-Credits.
+Credits & TechnicalSheet.
 
-Tags.
+Tags & Filters.
 
 Bibliography.
 
@@ -236,19 +236,21 @@ Esperar aprovação.
 
 ## **Etapa 6**
 
-Criar CMS.
+Modelar Content Collections e Schemas Zod.
 
-Coleções.
+`projects` (Estudos de caso completos).
 
-Campos.
+`photography` (Ensaios visuais).
 
-Categorias.
+`films` (Obras audiovisuais e ficha técnica).
 
-Tags.
+`research` (Pesquisa e ensaios).
 
-Relacionamentos.
+`about` & `curriculum` (Páginas biográficas e trajetória).
 
-Preview.
+Validação estrita de campos obrigatórios e opcionais.
+
+Relacionamentos conceituais ("Veja também").
 
 Esperar aprovação.
 
@@ -256,15 +258,15 @@ Esperar aprovação.
 
 ## **Etapa 7**
 
-Adicionar conteúdo.
+Adicionar conteúdo inicial.
 
-Primeiro projeto.
+Primeiro projeto: **Instalações Dançantes** (projeto âncora do Hero da Home).
 
 Segundo projeto.
 
 Terceiro projeto.
 
-Revisar.
+Revisar integridade visual e metodológica.
 
 Esperar aprovação.
 
@@ -434,29 +436,23 @@ URLs amigáveis.
 
 ---
 
-# **CMS**
+# **GESTÃO DE CONTEÚDO (CONTENT COLLECTIONS)**
 
-Todo conteúdo deverá ser editável.
+Todo conteúdo deverá ser editável via arquivos Markdown / MDX estruturados em `src/content/`.
 
-Nenhum texto importante poderá ficar fixo no código.
+Nenhum texto de projeto ou ensaio poderá ficar fixo no código dos componentes.
 
-As páginas deverão ser construídas através de componentes reutilizáveis.
+As páginas deverão ser construídas através de componentes reutilizáveis que consomem schemas Zod tipados.
 
 ---
 
-# **INTERNACIONALIZAÇÃO**
+# **IDIOMA E ROTEAMENTO**
 
-Todo conteúdo deverá existir em português e inglês.
+O projeto é focado integralmente no idioma **Português do Brasil (PT-BR)**.
 
-Nunca misturar idiomas.
+URLs amigáveis, limpas e semânticas.
 
-Cada idioma terá:
-
-URL própria.
-
-SEO próprio.
-
-Conteúdo próprio.
+SEO, Open Graph e metadados otimizados para língua portuguesa.
 
 ---
 

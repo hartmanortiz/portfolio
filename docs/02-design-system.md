@@ -402,13 +402,13 @@ Descrição
 
 # **13\. Vídeos**
 
-Sempre incorporados.
+Sempre incorporados via componente de alta performance (`LiteEmbed`).
 
 Sem autoplay com áudio.
 
-Miniaturas bonitas.
+Miniatura editorial leve com carregamento sob demanda do player (YouTube/Vimeo) apenas após a interação do usuário, garantindo nota máxima de performance.
 
-Controle do usuário.
+Controle total do usuário.
 
 ---
 
@@ -492,13 +492,21 @@ Organizada.
 
 # **15\. Navegação**
 
-Menu lateral fixo no desktop.
+## **Desktop**
 
-Menu inferior no mobile.
+Menu lateral fixo, vertical e espaçado, integrado ao grid editorial.
 
-Sempre acessível.
+Sempre acessível, servindo como índice de leitura contínuo.
 
-Nunca esconder completamente a navegação.
+---
+
+## **Mobile**
+
+Botão de menu editorial minimalista ("Menu" / "Índice").
+
+Ao ser acionado, abre uma gaveta / painel textual em tela cheia com tipografia editorial limpa e espaçada.
+
+Nunca utilizar barras de navegação estilo aplicativo com ícones genéricos. Preservar a sensação de folhear um índice impresso.
 
 ---
 
@@ -719,7 +727,7 @@ O projeto não poderá utilizar:
 
 # **29\. Componentes Exclusivos do Projeto**
 
-Para reforçar a identidade, o site deverá contar com alguns componentes próprios:
+Para reforçar a identidade, o site deverá contar com componentes proprietários:
 
 **Índice do Arquivo:** uma navegação que apresente todos os projetos cronologicamente e por categorias.
 
@@ -728,4 +736,8 @@ Para reforçar a identidade, o site deverá contar com alguns componentes própr
 **Referências Visuais:** uma seção dedicada a livros, filmes, obras, artistas e materiais que influenciaram cada projeto.
 
 **Linha de Evolução:** um componente opcional que mostre a sequência "Problema → Pesquisa → Processo → Resultado", facilitando a compreensão da metodologia empregada.
+
+**Alternador de Modo Edital (Visualização Sintetizada):** um botão interativo discreto no topo de cada projeto que reorganiza a página para avaliadores culturais, destacando de forma concisa os objetivos, processo, resultados, ficha técnica e equipe.
+
+**LiteEmbed Audiovisual:** reprodutor de vídeo sob demanda para YouTube/Vimeo que preserva 100% da performance e velocidade de carregamento.
 

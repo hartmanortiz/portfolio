@@ -109,17 +109,15 @@ GitHub Pages
 ```text
 portfolio/
 ├── public/
-│   ├── admin/
-│   │   ├── index.html
-│   │   └── config.yml
-│   ├── images/
-│   ├── icons/
 │   ├── fonts/
 │   ├── favicons/
-│   └── videos/
+│   ├── icons/
+│   └── robots.txt
 │
 ├── src/
 │   ├── assets/
+│   │   ├── images/
+│   │   └── photography/
 │   ├── components/
 │   │   ├── ui/
 │   │   ├── editorial/
@@ -188,93 +186,59 @@ PascalCase
 
 O projeto utilizará layouts especializados e modulares:
 
-LayoutBase (estrutura HTML global, SEO, fontes, metadados)
+* `LayoutBase`: Estrutura HTML global, meta tags SEO, fontes, scripts essenciais e casca responsiva.
+* `LayoutLanding`: Página inicial (Home) com Hero editorial (*Instalações Dançantes*) e síntese curatorial.
+* `LayoutProject`: Estudos de caso detalhados, suportando alternância dinâmica para **Modo Edital**.
+* `LayoutArchive`: Eixo agregador cronológico com filtros facetados e indexação.
+* `LayoutArtDirection`: Página independente com textos curatoriais de direção de arte e cenografia.
+* `LayoutFilms`: Página independente de obras audiovisuais com players `LiteEmbed`.
+* `LayoutPhotography`: Página independente de ensaios fotográficos com visualização e metadados.
+* `LayoutResearch`: Página independente com ensaios acadêmicos, notas laterais e bibliografia.
+* `LayoutAbout`: Apresentação institucional, biografia, manifesto e posicionamento.
+* `LayoutCurriculum`: Trajetória acadêmica, artística, histórico de editais e prêmios.
+* `LayoutContact`: Canais de comunicação institucional e agenciamento.
 
-LayoutEditorial (páginas de conteúdo textual longo)
-
-LayoutProject (estudos de caso de projetos com timeline e ficha técnica)
-
-LayoutArchive (índice cronológico e filtrável do acervo)
-
-LayoutPhotography (galerias fotográficas com visualização expandida)
-
-LayoutFilms (grid audiovisual com players embutidos)
-
-LayoutResearch (ensaios acadêmicos, notas e bibliografia)
-
-LayoutAbout (apresentação institucional e biografia)
-
-LayoutCurriculum (trajetória acadêmica, artística e profissional)
-
-LayoutContact (canais de comunicação e agenciamento)
-
-LayoutLanding (página inicial / Home editorial)
-
-Cada layout será responsável apenas por estrutura e composição de casca.
-
-Nunca por regras de negócio de conteúdo.
+Cada layout será responsável apenas por casca estrutural e semântica.
 
 ---
 
 # **8\. Sistema de Componentes**
 
-Os componentes serão classificados em níveis.
+Os componentes são classificados em 3 níveis:
 
-## **Nível 1**
+## **Nível 1 — UI & Tipografia**
 
-UI
-
-Button
-
-Input
-
-Badge
-
-Divider
-
-Icon
+* `Button`: Botões editoriais mínimos com foco visível.
+* `Badge` / `Tag`: Rótulos taxonômicos de categorias e anos.
+* `Divider`: Linhas sutis de separação com ritmo visual.
+* `Heading` & `Text`: Wrappers tipográficos estruturados por Design Tokens.
 
 ---
 
-## **Nível 2**
+## **Nível 2 — Compostos & Navegação**
 
-Compostos
-
-Gallery
-
-Sidebar
-
-Timeline
-
-Quote
-
-Hero
-
-Breadcrumb
-
-Footer
+* `Sidebar`: Menu lateral fixo para desktop.
+* `MenuDrawer`: Gaveta editorial de navegação em tela cheia para mobile.
+* `LiteEmbed`: Reprodutor sob demanda para vídeos do YouTube e Vimeo.
+* `Gallery` & `ImageGrid`: Exposição de imagens com preservação de aspecto.
+* `Timeline` & `ProcessDiagram`: Linha do tempo metodológica.
+* `Quote`: Citações e depoimentos com tipografia serifada.
+* `Hero`: Abertura editorial com imagens de impacto.
+* `Breadcrumb`: Trilha de navegação contextual.
+* `Footer`: Rodapé editorial institucional.
 
 ---
 
-## **Nível 3**
+## **Nível 3 — Blocos Editoriais & Estudos de Caso**
 
-Editorial
-
-CaseStudy
-
-ResearchBlock
-
-Moodboard
-
-Storyboard
-
-Bibliography
-
-Credits
-
-TechnicalSheet
-
-ProcessSection
+* `EditorialBlock / ProjectEntry`: Bloco documental aberto sem aspecto de "card" de software.
+* `EditalToggle`: Botão de alternância interativa para o Modo de Avaliação de Editais.
+* `ResearchNotes`: Notas marginais de processo.
+* `Moodboard` & `Storyboard`: Sequências visuais narrativas.
+* `BibliographyBlock`: Referências acadêmicas formatadas.
+* `CreditsBlock`: Créditos de equipe e funções.
+* `TechnicalSheet`: Ficha técnica de produção.
+* `ArchiveIndex`: Sumário e índice filtrável do acervo vivo.
 
 ---
 
@@ -312,52 +276,48 @@ process.pdf
 
 ---
 
-# **10\. Estrutura de um Projeto**
+# **10\. Estrutura de um Projeto (Frontmatter Zod)**
 
-Campos tipados no Frontmatter (Zod):
+Campos tipados no schema da Content Collection `projects`:
 
-* `title` (Título)
-* `subtitle` (Subtítulo — opcional)
-* `description` (Resumo)
-* `slug` (Identificador de rota)
-* `lang` ('pt' | 'en')
-* `translationKey` (Chave de vinculação bilíngue)
-* `categories` (Array de categorias: Direção de Arte, Cinema, Fotografia, Pesquisa, etc.)
-* `date` (Data do projeto)
-* `cover` (Imagem de capa)
-* `tags` (Array de tags conceituais)
-* `published` (Boolean)
+* `title` (string — Título do projeto)
+* `subtitle` (string — opcional)
+* `description` (string — Resumo conceitual)
+* `slug` (string — Identificador único da rota)
+* `categories` (array de strings: Direção de Arte, Cinema, Fotografia, Pesquisa, etc.)
+* `date` (Date — Data ou ano de realização)
+* `cover` (ImageMetadata — Imagem local gerenciada em `src/assets/`)
+* `tags` (array de strings conceituais)
+* `published` (boolean — Controle de publicação)
 
-Blocos modulares opcionais (conforme o acervo de cada obra):
+Blocos modulares opcionais no corpo do documento ou frontmatter:
 
-* `context` (Contexto)
-* `problem` (Problema)
-* `research` (Pesquisa)
-* `references` (Referências)
-* `moodboard` (Moodboard)
-* `process` (Processo)
-* `result` (Resultado)
-* `gallery` (Galeria de imagens com legendas)
-* `videos` (Links incorporados YouTube/Vimeo)
-* `technicalSheet` (Ficha Técnica)
+* `context` (Contexto histórico ou institucional)
+* `problem` (Problema ou desafio curatorial)
+* `research` (Pesquisa teórica e visual)
+* `references` (Referências de artistas e materiais)
+* `moodboard` (Imagens conceituais de atmosfera)
+* `process` (Metodologia e desenvolvimento)
+* `result` (Resultado estético e impacto)
+* `gallery` (Galeria de imagens com legendas e créditos de fotografia)
+* `videos` (Array de URLs externas para reprodução via LiteEmbed)
+* `technicalSheet` (Ficha técnica detalhada)
 * `credits` (Créditos da equipe)
-* `bibliography` (Bibliografia)
-* `seo` (Metadados customizados de SEO)
-
-Nem todos os projetos precisam utilizar todos os blocos.
+* `bibliography` (Referências bibliográficas e fontes)
+* `seo` (Metadados customizados para busca e compartilhamento)
 
 ---
 
-# **11\. Modelagem do CMS**
+# **11\. Content Collections (src/content/config.ts)**
 
-Coleções estruturadas no Decap CMS (`/admin/config.yml`):
+Coleções tipadas com validação estática no Astro:
 
-* `projects` (Projetos e Estudos de Caso — PT e EN)
-* `photography` (Ensaios Fotográficos — PT e EN)
-* `films` (Obras Audiovisuais e Vídeos — PT e EN)
-* `research` (Pesquisas, Artigos e Ensaios — PT e EN)
-* `pages` (Páginas institucionais: Sobre, Currículo, Contato)
-* `settings` (Configurações globais, Menu, Taxonomias de Categorias e SEO)
+* `projects`: Estudos de caso detalhados de projetos artísticos e audiovisuais.
+* `photography`: Ensaios fotográficos com metadados visuais.
+* `films`: Obras audiovisuais integradas com LiteEmbed.
+* `research`: Ensaios teóricos, artigos e notas de investigação.
+* `about`: Conteúdo da página institucional Sobre e manifesto.
+* `curriculum`: Trajetória cronológica, acadêmica, prêmios e editais.
 
 ---
 
@@ -395,13 +355,16 @@ Indexação
 
 Imagens:
 
-Formatos modernos: WebP e AVIF otimizados.
+* Armazenadas localmente em `src/assets/images/` e `src/assets/photography/`.
+* Processadas e otimizadas automaticamente pelo pipeline do Astro (`astro:assets` integrado com Sharp).
+* Conversão automática para WebP e AVIF com múltiplos tamanhos responsivos e densidades de pixel (`srcset`).
+* Textos alternativos (`alt`) obrigatórios validados nos componentes.
 
 Vídeos:
 
-Players externos embutidos: YouTube e Vimeo.
-
-Vídeos pesados nunca serão versionados no repositório Git (apenas micro-animações/loops essenciais em `public/videos/`, caso indispensáveis).
+* Incorporação externa via YouTube e Vimeo utilizando o componente `LiteEmbed`.
+* Carregamento assíncrono sob demanda (sem carregamento inicial de scripts ou iframes pesados).
+* Proibido o versionamento de arquivos de vídeo de alta resolução no repositório Git.
 
 ---
 
@@ -429,13 +392,22 @@ config/
 
 ---
 
-# **16\. Internacionalização**
+# **16\. Idioma e Estrutura de Roteamento**
 
-pt/
+O projeto é inteiramente em **Português (PT-BR)**, eliminando prefixos ou complexidades de rotas redundantes.
 
-en/
+Estrutura de rotas estáticas:
 
-Nunca misturar idiomas.
+* `/` → `pages/index.astro` (Home com destaque em *Instalações Dançantes*)
+* `/sobre` → `pages/sobre.astro`
+* `/arquivo` → `pages/arquivo.astro`
+* `/direcao-de-arte` → `pages/direcao-de-arte.astro`
+* `/filmes` → `pages/filmes.astro`
+* `/fotografia` → `pages/fotografia.astro`
+* `/pesquisa` → `pages/pesquisa.astro`
+* `/curriculo` → `pages/curriculo.astro`
+* `/contato` → `pages/contato.astro`
+* `/projetos/[slug]` → `pages/projetos/[slug].astro`
 
 ---
 
@@ -485,75 +457,49 @@ Idioma.
 
 # **20\. Navegação**
 
-Header.
-
-Sidebar.
-
-Footer.
-
-Breadcrumb.
-
-Próximo projeto.
-
-Projeto anterior.
-
-Projetos relacionados.
+* **Desktop:** `Sidebar` fixa lateral com alinhamento vertical espaçado e tipografia minimalista.
+* **Mobile:** Botão de menu editorial ("Menu" / "Índice") que aciona o `MenuDrawer` em tela cheia com tipografia editorial generosa.
+* **Leitura Contínua:** Links contextuais de "Próximo Projeto", "Projeto Anterior" e "Projetos Relacionados" no encerramento de cada estudo de caso.
 
 ---
 
 # **21\. Componentes Especiais**
 
-Além dos componentes tradicionais, o projeto possuirá componentes exclusivos.
+O projeto conta com componentes proprietários de alta expressividade editorial:
+
+## **EditalToggle**
+
+Botão interativo que alterna a renderização da página de projeto entre a versão completa e a **Versão Sintetizada para Avaliação**, destacando objetivos, metodologia, ficha técnica, resultados e equipe.
+
+---
+
+## **LiteEmbed**
+
+Reprodutor audiovisual de alta performance para YouTube e Vimeo sob demanda, garantindo carregamento instantâneo.
+
+---
 
 ## **ArchiveIndex**
 
-Gera automaticamente o índice do acervo.
+Sumário cronológico e dinâmico de todo o acervo vivo, com filtragem cumulativa instantânea.
 
 ---
 
 ## **ResearchNotes**
 
-Notas laterais.
-
----
-
-## **ImageSequence**
-
-Sequência editorial.
+Notas laterais marginais de processo, reflexões e referências metodológicas.
 
 ---
 
 ## **ProcessDiagram**
 
-Linha do tempo do projeto.
-
----
-
-## **CreditsBlock**
-
-Equipe.
-
----
-
-## **BibliographyBlock**
-
-Referências.
+Linha evolutiva visual da metodologia ("Problema → Pesquisa → Processo → Resultado").
 
 ---
 
 ## **MetadataPanel**
 
-Ano.
-
-Categoria.
-
-Local.
-
-Cliente.
-
-Edital.
-
-Equipe.
+Painel condensado de metadados editoriais (Ano, Categorias, Local, Cliente, Edital, Funções e Equipe).
 
 ---
 

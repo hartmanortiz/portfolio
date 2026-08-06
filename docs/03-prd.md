@@ -16,17 +16,15 @@ Portfólio Digital Hartman Ortiz
 
 ## **Tipo**
 
-Aplicação Web Estática com CMS Headless.
+Aplicação Web Estática (SSG — Static Site Generation).
 
 ## **Plataforma**
 
-Website responsivo.
+Website responsivo com publicação no GitHub Pages.
 
-## **Idiomas**
+## **Idioma**
 
-Português (PT-BR)
-
-Inglês (EN)
+Português (PT-BR).
 
 ## **Objetivo**
 
@@ -38,14 +36,13 @@ Criar uma plataforma editorial capaz de documentar processos criativos, apresent
 
 O sistema deve permitir que o autor:
 
-* publique novos projetos;  
-* atualize conteúdos sem editar código;  
-* apresente estudos de caso;  
-* organize trabalhos por categorias;  
-* apresente fotografias;  
-* incorpore vídeos;  
-* publique textos longos;  
-* seja encontrado por mecanismos de busca.
+* publique novos projetos e estudos de caso adicionando arquivos Markdown/MDX e imagens diretamente no repositório Git;  
+* apresente estudos de caso com profundidade e rigor metodológico;  
+* organize trabalhos por categorias e temas;  
+* apresente fotografias em alta qualidade com metadados de luz e composição;  
+* incorpore vídeos com carregamento sob demanda de alta performance;  
+* publique textos longos e ensaios de pesquisa;  
+* seja indexado com excelência por mecanismos de busca (SEO).
 
 ---
 
@@ -86,23 +83,9 @@ Sem uso de estilos genéricos ou bibliotecas de componentes pré-moldados.
 
 ---
 
-## **CMS**
+## **Hospedagem & Deploy**
 
-Decap CMS.
-
----
-
-## **Banco de Dados**
-
-Não utilizar banco tradicional.
-
-Todo conteúdo será armazenado em arquivos Markdown (.md ou .mdx) versionados no GitHub.
-
----
-
-## **Hospedagem**
-
-GitHub Pages.
+GitHub Pages com pipeline automatizado via GitHub Actions.
 
 ---
 
@@ -122,15 +105,11 @@ Astro (Content Collections tipadas com Zod)
 
 ↓
 
-Layouts & Componentes Modulares
+Layouts & Componentes Modulares (Tailwind CSS + Tokens)
 
 ↓
 
-Markdown / MDX (`src/content/`)
-
-↓
-
-Decap CMS (`public/admin/`)
+Markdown / MDX (`src/content/`) & Imagens Locais (`src/assets/`)
 
 ↓
 
@@ -138,11 +117,11 @@ GitHub (Repositório)
 
 ↓
 
-GitHub Actions (Build & Testes)
+GitHub Actions (Build, Otimização de Assets e Testes)
 
 ↓
 
-GitHub Pages (Hospedagem Estática)  
+GitHub Pages (Hospedagem Estática Global)  
 ---
 
 # **6\. Estrutura de Pastas**
@@ -150,17 +129,15 @@ GitHub Pages (Hospedagem Estática)
 ```text
 portfolio/
 ├── public/
-│   ├── admin/
-│   │   ├── index.html
-│   │   └── config.yml
-│   ├── images/
-│   ├── icons/
 │   ├── fonts/
 │   ├── favicons/
-│   └── videos/
+│   ├── icons/
+│   └── robots.txt
 │
 ├── src/
 │   ├── assets/
+│   │   ├── images/
+│   │   └── photography/
 │   ├── components/
 │   │   ├── ui/
 │   │   ├── editorial/
@@ -186,25 +163,23 @@ portfolio/
 │   └── types/
 ```
 
-Toda a organização deve favorecer a escalabilidade e a separação clara entre conteúdo (`src/content/`), interface (`src/components/`), layout (`src/layouts/`) e configuração (`src/config/` e `src/tokens/`).
+Toda a organização garante a separação clara entre conteúdo (`src/content/`), imagens gerenciadas pelo Astro (`src/assets/`), componentes reutilizáveis (`src/components/`), layouts estruturais (`src/layouts/`) e tokens de design (`src/tokens/`).
 
 ---
 
 # **7\. Modelo de Conteúdo**
 
-Cada projeto deverá possuir campos estruturados, permitindo consistência entre o CMS e o site através de schemas tipados com Zod no Astro.
+Cada projeto deverá possuir campos estruturados no frontmatter, validados por schemas tipados com Zod no Astro.
 
 Campos obrigatórios:
 
 * título (`title`);  
 * resumo (`description` / `summary`);  
 * slug (`slug`);  
-* idioma (`lang` — 'pt' | 'en');  
-* chave de tradução (`translationKey` — vincula as versões PT e EN correspondentes);  
-* categorias (`categories` — array de categorias, permitindo multi-classificação);  
+* categorias (`categories` — array de categorias: Direção de Arte, Cinema, Fotografia, Pesquisa, etc.);  
 * data (`date`);  
-* capa (`cover`);  
-* tags (`tags` — array de strings);  
+* capa (`cover` — imagem local em `src/assets/`);  
+* tags (`tags` — array de termos conceituais);  
 * status de publicação (`published` / `draft`).
 
 Campos opcionais (conteúdo modular — cada projeto inclui apenas o material existente):
@@ -215,7 +190,7 @@ Campos opcionais (conteúdo modular — cada projeto inclui apenas o material ex
 * pesquisa (`research`);  
 * referências (`references`);  
 * imagens / galeria (`gallery` — lista de imagens com alt e legenda);  
-* vídeos (`videos` — URLs externas YouTube/Vimeo);  
+* vídeos (`videos` — lista de URLs externas YouTube/Vimeo para reprodução via LiteEmbed);  
 * moodboard (`moodboard`);  
 * storyboard (`storyboard`);  
 * protótipos (`prototypes`);  
@@ -297,49 +272,30 @@ etc.
 
 ---
 
-# **10\. Tipos de Conteúdo**
+# **10\. Tipos de Conteúdo (Content Collections)**
 
-O CMS deverá permitir criar:
+As coleções gerenciadas em `src/content/` são:
 
-Projeto
-
-Fotografia
-
-Texto
-
-Página
-
-Livro
-
-Filme Referenciado
-
-Pesquisa
-
-Cada tipo poderá possuir campos próprios.
+* `projects` (Estudos de caso completos de projetos artísticos e audiovisuais)
+* `photography` (Ensaios fotográficos e documentação visual)
+* `films` (Obras audiovisuais com fichas técnicas e players LiteEmbed)
+* `research` (Textos de pesquisa acadêmica, ensaios teóricos e cadernos de estudo)
+* `about` (Biografia, manifesto e apresentação do autor)
+* `curriculum` (Trajetória cronológica, formação, prêmios e histórico de editais)
 
 ---
 
 # **11\. Estrutura da Home**
 
-A Home deverá conter, em ordem:
+A Home deverá conter, em ordem rigorosa:
 
-Hero editorial com projeto em destaque.
-
-Sequência de projetos recentes.
-
-Breve apresentação.
-
-Projetos em destaque.
-
-Categorias.
-
-Linha do tempo.
-
-Fotografia em destaque.
-
-Contato.
-
-Rodapé.
+1. **Hero Editorial de Abertura:** Destaque para o projeto consagrado **"Instalações Dançantes"**, com imagem de grande impacto, síntese conceitual e chamada para o estudo de caso completo.
+2. **Sequência de Projetos Recentes:** Linha editorial de projetos destacados.
+3. **Breve Apresentação / Manifesto:** Declaração de posicionamento (*"Pesquisa como método de criação"*).
+4. **Acervo em Destaque:** Seleção curatorial por categorias.
+5. **Fotografia em Destaque:** Ensaio visual de grande respiro.
+6. **Linha do Tempo Síntese:** Marcos da trajetória profissional.
+7. **Contato & Rodapé:** Informações de comunicação e créditos editoriais.
 
 ---
 
@@ -395,35 +351,20 @@ Todo o site deverá ser composto por componentes reutilizáveis e editoriais.
 
 Exemplos:
 
-Gallery
-
-VideoBlock
-
-ImageGrid
-
-Quote
-
-Timeline / ProcessDiagram
-
-Bibliography
-
-SidebarNote / ResearchNotes
-
-Credits
-
-Hero
-
-Footer
-
-Header
-
-Tag
-
-Filter
-
-EditorialBlock / ProjectEntry (substitui o conceito de Card tradicional, mantendo estética editorial aberta sem bordas ou sombras pesadas)
-
-ProjectNavigation / MetadataPanel
+* `EditorialBlock / ProjectEntry` (substitui o conceito de Card tradicional, mantendo estética editorial aberta sem bordas ou sombras pesadas)
+* `LiteEmbed` (reprodutor audiovisual leve para YouTube/Vimeo sob demanda)
+* `EditalToggle` (botão interativo que alterna dinamicamente a página do projeto para a visualização sintetizada para avaliadores)
+* `MenuDrawer` (gaveta / painel textual em tela cheia para navegação mobile)
+* `Sidebar` (menu lateral fixo no desktop)
+* `Gallery` & `ImageGrid` (galerias com proporção preservada)
+* `Quote` (citações destacadas)
+* `Timeline / ProcessDiagram` (linha evolutiva metodológica)
+* `Bibliography` (referências bibliográficas)
+* `SidebarNote / ResearchNotes` (notas marginais de processo)
+* `Credits` & `TechnicalSheet` (equipe e dados de produção)
+* `Hero` (abertura editorial)
+* `Tag` & `Filter` (taxonomias e filtros cumulativos)
+* `ProjectNavigation` / `MetadataPanel` (navegação entre projetos e metadados)
 
 Esses componentes deverão aceitar parâmetros configuráveis para evitar duplicação de código.
 
@@ -475,27 +416,22 @@ Pesquisa
 
 ---
 
-# **16\. Internacionalização**
+# **16\. Idioma e Roteamento**
 
-Todo conteúdo deverá existir em:
+O produto adota o idioma **Português do Brasil (PT-BR)** de forma integral e exclusiva, eliminando complexidades de sincronização bilíngue.
 
-Português.
+As rotas são diretas, limpas e semânticas:
 
-Inglês.
-
-Cada idioma possuirá:
-
-URL própria.
-
-SEO próprio.
-
-Título próprio.
-
-Descrição própria.
-
-Slug próprio.
-
-A troca de idioma deverá preservar, sempre que possível, o contexto da página correspondente.
+* `/` (Home com destaque em *Instalações Dançantes*)
+* `/sobre` (Apresentação institucional e manifesto)
+* `/arquivo` (Acervo completo e filtros do arquivo vivo)
+* `/direcao-de-arte` (Página temática de direção de arte e cenografia)
+* `/filmes` (Página temática de cinema e obras audiovisuais)
+* `/fotografia` (Página temática de ensaios fotográficos)
+* `/pesquisa` (Página temática de investigações e artigos)
+* `/curriculo` (Trajetória profissional, acadêmica e editais)
+* `/contato` (Canais de comunicação)
+* `/projetos/[slug]` (Página individual do estudo de caso)
 
 ---
 
@@ -573,19 +509,13 @@ Hierarquia semântica correta.
 
 ---
 
-# **20\. Segurança e Autenticação**
+# **20\. Segurança e Infraestrutura**
 
-Sem autenticação pública para visualização do site.
-
-Painel administrativo do Decap CMS protegido via fluxo de autenticação GitHub (OAuth PKCE Authorization Flow ou proxy bridge para GitHub Pages).
-
-Deploy automatizado via GitHub Actions.
-
-Dependências atualizadas.
-
-Headers de segurança quando suportados pela hospedagem.
-
-Validação de schema de conteúdo no processo de build via Zod.
+* Sem banco de dados ou autenticação de servidores (arquitetura 100% estática via Jamstack).
+* Hospedagem segura e imutável no GitHub Pages via HTTPS nativo.
+* Deploy automatizado via GitHub Actions com compilação e verificação de integridade no build.
+* Dependências travadas e atualizadas via gerenciador de pacotes.
+* Validação estrita de schema de conteúdo no processo de build via Zod.
 
 ---
 
@@ -639,41 +569,21 @@ Desativação automática para usuários que preferem menos movimento (`prefers-
 
 ---
 
-# **24\. CMS**
+# **24\. Gestão de Conteúdo e Publicação**
 
-O painel administrativo do Decap CMS (`/admin/`) deverá permitir:
+A gestão de conteúdo é realizada de forma direta e controlada via repositório Git:
 
-Criar projeto.
-
-Editar projeto.
-
-Excluir projeto.
-
-Enviar imagens e gerenciar assets.
-
-Adicionar links de vídeos externos (YouTube/Vimeo).
-
-Editar páginas institucionais.
-
-Editar traduções em PT-BR e EN (gerenciadas por `translationKey`).
-
-Editar menu e navegação.
-
-Editar SEO e metadados.
-
-Gerenciar categorias e tags.
-
-Visualizar rascunhos antes da publicação.
+1. O autor adiciona ou edita arquivos Markdown/MDX na pasta `src/content/`.
+2. As imagens correspondentes são adicionadas em `src/assets/`.
+3. Ao realizar o commit/push para o repositório no GitHub, a GitHub Action compila o site, otimiza os assets e publica a versão estável no GitHub Pages.
 
 ---
 
-# **25\. Fluxo Editorial**
+# **25\. Fluxo de Atualização**
 
-O ciclo de publicação será:
+Edição Local / Rascunho → Commit / Push → Build & Validação Zod → Publicação no GitHub Pages.
 
-Rascunho → Revisão → Publicado.
-
-O CMS deverá permitir salvar conteúdos incompletos sem torná-los públicos.
+Em caso de erro de sintaxe ou campo obrigatório ausente, a compilação é interrompida pelo Astro/Zod, prevenindo a publicação de páginas inconsistentes.
 
 ---
 
@@ -691,15 +601,13 @@ O sistema deverá suportar:
 
 Mais de 500 projetos.
 
-Milhares de imagens.
+Milhares de imagens otimizadas em WebP/AVIF.
 
-Centenas de vídeos incorporados.
+Centenas de vídeos incorporados via LiteEmbed.
 
-Novas categorias.
+Novas categorias e temas.
 
-Novos idiomas.
-
-Novos componentes.
+Novos componentes editoriais.
 
 Sem necessidade de reestruturação.
 
@@ -713,13 +621,9 @@ Links quebrados.
 
 Imagens ausentes.
 
-Metadados obrigatórios.
+Metadados obrigatórios no frontmatter via Zod.
 
-Campos vazios.
-
-Conflitos de tradução.
-
-Erros de build.
+Erros de compilação do Astro.
 
 ---
 
@@ -743,12 +647,14 @@ Evitar lógica duplicada.
 
 O projeto será considerado pronto quando:
 
-* o CMS permitir criar um projeto completo sem editar código;  
-* a interface funcionar integralmente em dispositivos móveis e desktops;  
-* os dois idiomas estiverem plenamente operacionais;  
+* novos projetos puderem ser adicionados via arquivos Markdown com validação estática de schema;  
+* a interface funcionar integralmente em dispositivos móveis (com gaveta textual em tela cheia) e desktops (com menu lateral fixo);  
+* as páginas temáticas independentes (`/direcao-de-arte`, `/filmes`, `/fotografia`, `/pesquisa`) e o `/arquivo` estiverem plenamente funcionais;  
+* o botão de **Modo Edital** alternar perfeitamente para a versão sintetizada;  
+* os vídeos incorporados utilizarem `LiteEmbed` sem comprometer o carregamento inicial;  
 * os filtros e a busca retornarem resultados consistentes;  
-* o desempenho atender às metas estabelecidas;  
-* a experiência refletir a identidade editorial definida nos Documentos 1 e 2\.
+* o desempenho atingir Lighthouse ≥ 95 em todas as métricas;  
+* a experiência refletir a identidade editorial definida nos Documentos 1 e 2.
 
 ---
 
@@ -756,13 +662,15 @@ O projeto será considerado pronto quando:
 
 Requisitos refinados para o contexto de arquivo vivo:
 
-**Sistema de relações entre projetos:** permitir vincular um projeto a outros relacionados ("Veja também"), por tema, técnica ou período.
+**Alternador de Modo Edital:** botão interativo no topo do estudo de caso que reorganiza o conteúdo em formato conciso voltado a avaliadores de editais e comissões culturais (foco em objetivos, processo, resultados, ficha técnica e créditos), acompanhado de folha de estilos `@media print` para exportação impecável em PDF.
 
-**Índice automático:** gerar automaticamente um índice navegável em projetos longos, facilitando a leitura de estudos de caso.
+**LiteEmbed para Vídeos:** reprodutor de mídia sob demanda para YouTube e Vimeo que renderiza apenas a imagem de capa e dispara o player mediante interação, eliminando o carregamento de scripts pesados de terceiros no carregamento da página.
 
-**Modo de visualização para editais:** uma opção que reorganize a página destacando objetivos, processo, resultados, ficha técnica e créditos, facilitando o uso do site como material de apoio em avaliações.
+**Gaveta Editorial Mobile (MenuDrawer):** navegação mobile em painel textual de tela cheia que preserva a experiência de leitura de um índice impresso.
 
-**Gerenciamento de mídia:** além do upload, o sistema deve gerar automaticamente diferentes resoluções de imagem em WebP/AVIF, definir textos alternativos obrigatórios e permitir legendas e créditos de autoria.
+**Sistema de relações entre projetos:** vinculação de projetos relacionados ("Veja também") por intersecção temática, técnica ou período.
 
-**Busca estática enriquecida por conceitos:** localização rápida de projetos por conceitos metodológicos como "pesquisa", "infância", "cenografia" ou "materialidade", via metadados estruturados e indexação estática leve (Pagefind), sem sobrecarga de servidores.
+**Índice automático:** sumário de âncoras gerado dinamicamente para estudos de caso longos.
+
+**Busca estática enriquecida por conceitos:** localização rápida de projetos por conceitos metodológicos ("pesquisa", "infância", "cenografia", "materialidade") via Pagefind sem necessidade de servidor.
 
