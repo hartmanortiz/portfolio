@@ -1,0 +1,99 @@
+/* =============================================================
+   MOTION — Portfólio Hartman Ortiz
+   Fonte: docs/02-design-system.md — §16
+   
+   Animações devem parecer naturais.
+   Nunca chamar mais atenção que o conteúdo.
+   Lentas. Elegantes. Sem exagero.
+   
+   Regra: Todos os componentes com animação devem verificar
+          prefers-reduced-motion antes de animar.
+   ============================================================= */
+
+:root {
+
+  /* --- Durações ---------------------------------------------- */
+
+  /* Micro-interações: hover, focus                              */
+  --duration-instant:  80ms;
+  --duration-fast:     150ms;
+
+  /* Transições de estado: aparecimento, desaparecimento         */
+  --duration-base:     250ms;
+
+  /* Transições de página, entrada de elementos                  */
+  --duration-slow:     400ms;
+
+  /* Animações editoriais: parallax, revelar texto               */
+  --duration-editorial: 700ms;
+
+  /* Transições de fundo de página                               */
+  --duration-ambient:  1200ms;
+
+
+  /* --- Easings ----------------------------------------------- */
+
+  /*
+    Preferir curvas que desaceleram ao final (ease-out).
+    Elementos que aparecem: ease-out (natural, chegam suavemente).
+    Elementos que somem: ease-in (partem com energia).
+    Interações de hover: ease-in-out (suave nos dois lados).
+  */
+
+  /* Padrão para a maioria das transições                        */
+  --ease-base:        cubic-bezier(0.25, 0.1, 0.25, 1.0);
+
+  /* Para elementos que entram na tela                           */
+  --ease-out:         cubic-bezier(0.0, 0.0, 0.2, 1.0);
+
+  /* Para elementos que saem da tela                             */
+  --ease-in:          cubic-bezier(0.4, 0.0, 1.0, 1.0);
+
+  /* Para hover e interações bidirecional                        */
+  --ease-in-out:      cubic-bezier(0.4, 0.0, 0.2, 1.0);
+
+  /* Editorial — aceleração inicial suave, desaceleração longa   */
+  --ease-editorial:   cubic-bezier(0.16, 1, 0.3, 1);
+
+
+  /* --- Compostos (duração + easing) -------------------------- */
+
+  --transition-fast:      var(--duration-fast)     var(--ease-base);
+  --transition-base:      var(--duration-base)     var(--ease-base);
+  --transition-slow:      var(--duration-slow)     var(--ease-out);
+  --transition-editorial: var(--duration-editorial) var(--ease-editorial);
+
+
+  /* --- Delays ------------------------------------------------ */
+
+  /* Para stagger de elementos em lista                          */
+  --delay-stagger-1: 50ms;
+  --delay-stagger-2: 100ms;
+  --delay-stagger-3: 150ms;
+  --delay-stagger-4: 200ms;
+  --delay-stagger-5: 250ms;
+
+}
+
+
+/* =============================================================
+   REDUÇÃO DE MOVIMENTO
+   Respeito obrigatório à preferência do sistema.
+   Todos os componentes devem herdar estas regras.
+   ============================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-instant:   0ms;
+    --duration-fast:      0ms;
+    --duration-base:      0ms;
+    --duration-slow:      0ms;
+    --duration-editorial: 0ms;
+    --duration-ambient:   0ms;
+
+    --transition-fast:      0ms var(--ease-base);
+    --transition-base:      0ms var(--ease-base);
+    --transition-slow:      0ms var(--ease-out);
+    --transition-editorial: 0ms var(--ease-editorial);
+  }
+}

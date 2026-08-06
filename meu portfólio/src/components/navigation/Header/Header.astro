@@ -1,0 +1,84 @@
+---
+/**
+ * Header
+ * Navegação principal do portfólio.
+ *
+ * Desktop: coluna lateral fixa à esquerda (ADR-003)
+ * Mobile:  barra inferior fixa
+ *
+ * Fonte: docs/02-design-system.md — §15
+ *        decisions/ADR-003-navigation.md
+ */
+
+import type { HeaderProps, NavLink } from "./Header.ts"
+
+const { lang, currentPath } = Astro.props as HeaderProps
+
+const navPt: NavLink[] = [
+  { label: "Início",     href: "/",           labelEn: "Home" },
+  { label: "Arquivo",    href: "/arquivo/",   labelEn: "Archive" },
+  { label: "Sobre",      href: "/sobre/",     labelEn: "About" },
+  { label: "Fotografia", href: "/fotografia/",labelEn: "Photography" },
+  { label: "Filmes",     href: "/filmes/",    labelEn: "Films" },
+  { label: "Pesquisa",   href: "/pesquisa/",  labelEn: "Research" },
+  { label: "Currículo",  href: "/curriculo/", labelEn: "Curriculum" },
+  { label: "Contato",    href: "/contato/",   labelEn: "Contact" },
+]
+
+const navEn: NavLink[] = navPt.map((link) => ({
+  label: link.labelEn ?? link.label,
+  href:  `/en${link.href}`,
+}))
+
+const nav   = lang === "pt" ? navPt : navEn
+const altLang = lang === "pt" ? "en" : "pt"
+const altHref = lang === "pt" ? `/en${currentPath}` : currentPath.replace(/^\/en/, "") || "/"
+
+function isActive(href: string): boolean {
+  if (href === "/" || href === "/en/") return currentPath === href
+  return currentPath.startsWith(href)
+}
+---
+
+<!-- Desktop: sidebar lateral -->
+<header class="header" role="banner">
+  <nav class="header__nav" aria-label={lang === "pt" ? "Navegação principal" : "Main navigation"}>
+
+    <!-- Identidade -->
+    <a href={lang === "pt" ? "/" : "/en/"} class="header__identity" aria-label="Hartman Ortiz — início">
+      <span class="header__name">Hartman Ortiz</span>
+      <span class="header__role" aria-hidden="true">
+        {lang === "pt" ? "Direção de Arte" : "Art Direction"}
+      </span>
+    </a>
+
+    <!-- Links -->
+    <ul class="header__list" role="list">
+      {nav.map((link) => (
+        <li class="header__item">
+          <a
+            href={link.href}
+            class={`header__link${isActive(link.href) ? " header__link--active" : ""}`}
+            aria-current={isActive(link.href) ? "page" : undefined}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- Seletor de idioma -->
+    <div class="header__lang">
+      <a
+        href={altHref}
+        class="header__lang-link"
+        hreflang={altLang}
+        lang={altLang}
+        aria-label={lang === "pt" ? "View in English" : "Ver em Português"}
+      >
+        {altLang === "en" ? "EN" : "PT"}
+      </a>
+    </div>
+
+  </nav>
+</header>

@@ -1,0 +1,102 @@
+/* =============================================================
+   BREAKPOINTS — Portfólio Hartman Ortiz
+   Fonte: docs/03-prd.md — §22 | docs/02-design-system.md — §20
+   
+   Abordagem: Mobile First.
+   Nunca Desktop First.
+   
+   Uso em CSS: @media (min-width: var(--bp-tablet)) — NÃO FUNCIONA.
+   CSS custom properties não funcionam dentro de @media.
+   
+   Por isso, os valores são documentados aqui como referência,
+   e o arquivo breakpoints.js exporta as mesmas constantes
+   para uso em JavaScript quando necessário.
+   
+   No CSS, usar os valores literais abaixo diretamente em @media.
+   ============================================================= */
+
+/*
+  --bp-mobile:    0px        (padrão — sem media query necessária)
+  --bp-tablet:    640px      @media (min-width: 640px)
+  --bp-notebook:  1024px     @media (min-width: 1024px)
+  --bp-desktop:   1280px     @media (min-width: 1280px)
+  --bp-wide:      1536px     @media (min-width: 1536px)
+*/
+
+
+/* =============================================================
+   REFERÊNCIA DE USO
+   ============================================================= */
+
+/*
+  Modo de uso correto no CSS (mobile first):
+
+  .componente {
+    font-size: var(--text-body);          ← mobile
+  }
+
+  @media (min-width: 640px) {             ← tablet
+    .componente { ... }
+  }
+
+  @media (min-width: 1024px) {            ← notebook
+    .componente { ... }
+  }
+
+  @media (min-width: 1280px) {            ← desktop
+    .componente { ... }
+  }
+
+  @media (min-width: 1536px) {            ← wide
+    .componente { ... }
+  }
+*/
+
+
+/* =============================================================
+   TOKENS DE LAYOUT POR BREAKPOINT
+   Aplicados como utilidades via :root
+   ============================================================= */
+
+/* Mobile (padrão) */
+:root {
+  --columns: 4;
+  --gutter:  var(--space-2);    /* 16px */
+  --margin:  var(--space-2);    /* 16px */
+}
+
+/* Tablet: 640px+ */
+@media (min-width: 640px) {
+  :root {
+    --columns: 8;
+    --gutter:  var(--space-3);  /* 24px */
+    --margin:  var(--space-4);  /* 32px */
+  }
+}
+
+/* Notebook: 1024px+ */
+@media (min-width: 1024px) {
+  :root {
+    --columns: 12;
+    --gutter:  var(--space-4);  /* 32px */
+    --margin:  var(--space-6);  /* 48px */
+  }
+}
+
+/* Desktop: 1280px+ */
+@media (min-width: 1280px) {
+  :root {
+    --columns: 12;
+    --gutter:  var(--space-4);  /* 32px */
+    --margin:  var(--space-8);  /* 64px */
+  }
+}
+
+/* Wide: 1536px+ */
+@media (min-width: 1536px) {
+  :root {
+    --columns: 12;
+    --gutter:  var(--space-4);  /* 32px */
+    --margin:  var(--space-12); /* 96px */
+  }
+}

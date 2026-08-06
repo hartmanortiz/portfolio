@@ -1,0 +1,79 @@
+/* =============================================================
+   COLORS — Portfólio Hartman Ortiz
+   Fonte: docs/02-design-system.md — §10
+   
+   Regra: Nunca usar hex diretamente no projeto.
+          Sempre referenciar via variável CSS.
+   ============================================================= */
+
+:root {
+
+  /* --- Base -------------------------------------------------- */
+
+  /* Papel: fundo principal — branco quente, levemente creme     */
+  --color-paper:          hsl(40, 18%, 96%);
+
+  /* Tinta: preto principal — quente, nunca azulado              */
+  --color-ink:            hsl(30, 8%, 10%);
+
+  /* Grafite: cinza médio para texto secundário e divisores      */
+  --color-graphite:       hsl(30, 5%, 38%);
+
+  /* Marrom profundo: para ênfase e variação tonal               */
+  --color-brown:          hsl(22, 20%, 20%);
+
+
+  /* --- Superfícies ------------------------------------------- */
+
+  /* Fundo de seções alternadas — papel ligeiramente mais escuro */
+  --color-surface:        hsl(40, 12%, 91%);
+
+  /* Fundo de notas laterais e blocos de destaque               */
+  --color-surface-alt:    hsl(36, 14%, 87%);
+
+  /* Bordas e divisores — muito sutis                            */
+  --color-border:         hsl(30, 8%, 80%);
+
+  /* Bordas mais visíveis (hover, seleção)                       */
+  --color-border-strong:  hsl(30, 8%, 60%);
+
+
+  /* --- Texto ------------------------------------------------- */
+
+  /* Texto principal — tinta quente                              */
+  --color-text:           hsl(30, 8%, 10%);
+
+  /* Texto secundário — grafite                                  */
+  --color-text-muted:     hsl(30, 5%, 42%);
+
+  /* Texto de legendas, metadados, notas — muito discreto        */
+  --color-text-subtle:    hsl(30, 5%, 58%);
+
+  /* Texto sobre fundos escuros                                  */
+  --color-text-inverse:   hsl(40, 18%, 96%);
+
+
+  /* --- Destaques (usados com parcimônia) --------------------- */
+
+  /* Vermelho queimado — para elementos pontuais de ênfase       */
+  --color-rust:           hsl(4, 60%, 42%);
+  --color-rust-light:     hsl(4, 55%, 92%);
+
+  /* Laranja queimado — variação quente                          */
+  --color-burnt:          hsl(22, 68%, 42%);
+  --color-burnt-light:    hsl(22, 60%, 92%);
+
+  /* Ocre — para elementos editoriais, etiquetas                 */
+  --color-ochre:          hsl(40, 55%, 45%);
+  --color-ochre-light:    hsl(40, 50%, 92%);
+
+
+  /* --- Estados ----------------------------------------------- */
+
+  /* Foco (navegação por teclado) — visível, não intrusivo       */
+  --color-focus:          hsl(22, 68%, 42%);
+
+  /* Hover em links e elementos interativos                      */
+  --color-hover:          hsl(30, 8%, 18%);
+
+}

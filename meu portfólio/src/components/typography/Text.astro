@@ -1,0 +1,23 @@
+---
+/**
+ * Text
+ * Elemento de texto com variante semântica.
+ *
+ * Variantes: body, lead, caption, meta, ui
+ * Elemento HTML configurável via prop `as`.
+ *
+ * Fonte: docs/02-design-system.md — §8, §9
+ */
+
+import type { TextProps } from "./Typography.ts"
+
+const {
+  as:     Tag    = "p",
+  variant        = "body",
+  class: classes = "",
+} = Astro.props as TextProps
+---
+
+<Tag class={`text text--${variant} ${classes}`}>
+  <slot />
+</Tag>

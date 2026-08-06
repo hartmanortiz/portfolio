@@ -1,0 +1,133 @@
+/* =============================================================
+   Button
+   "Poucos. Muito discretos. Sem aparência tecnológica."
+   — docs/02-design-system.md §18
+   ============================================================= */
+
+
+/* --- Base --------------------------------------------------- */
+
+.btn {
+  /* Reset */
+  appearance: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  /* Tipografia */
+  font-family:   var(--font-interface);
+  font-size:     var(--text-ui);
+  font-weight:   var(--font-weight-medium);
+  letter-spacing: var(--tracking-normal);
+  line-height:   var(--leading-none);
+
+  /* Layout */
+  display:        inline-flex;
+  align-items:    center;
+  gap:            var(--space-1);
+  text-decoration: none;
+
+  /* Área de toque mínima (WCAG 2.2) */
+  min-height: 44px;
+
+  /* Transição */
+  transition: color      var(--transition-fast),
+              background var(--transition-fast),
+              border-color var(--transition-fast);
+
+  /* Foco */
+  outline: none;
+}
+
+.btn:focus-visible {
+  outline:        2px solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius:  var(--radius-sm);
+}
+
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor:  not-allowed;
+  pointer-events: none;
+}
+
+
+/* --- Variante: default -------------------------------------- */
+/*
+  Borda fina. Sem preenchimento.
+  Parece pertencer ao texto, não destacar sobre ele.
+*/
+
+.btn--default {
+  color:        var(--color-ink);
+  border:       var(--border-thin) solid var(--color-border-strong);
+  border-radius: var(--radius-base);
+  padding:      var(--space-2) var(--space-3);
+}
+
+.btn--default:hover {
+  color:         var(--color-paper);
+  background:    var(--color-ink);
+  border-color:  var(--color-ink);
+}
+
+
+/* --- Variante: ghost ---------------------------------------- */
+/*
+  Sem borda. Sem fundo. Apenas texto.
+  Para ações secundárias.
+*/
+
+.btn--ghost {
+  color:   var(--color-text-muted);
+  padding: var(--space-1) 0;
+}
+
+.btn--ghost:hover {
+  color: var(--color-ink);
+}
+
+
+/* --- Variante: link ----------------------------------------- */
+/*
+  Parece um link de texto comum.
+  Para ações em linha com conteúdo editorial.
+*/
+
+.btn--link {
+  color:                var(--color-ink);
+  padding:              0;
+  text-decoration:      underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.btn--link:hover {
+  color: var(--color-text-muted);
+}
+
+
+/* --- Tamanhos ----------------------------------------------- */
+
+.btn--sm {
+  font-size: var(--text-meta);
+  min-height: 36px;
+}
+
+.btn--md {
+  /* padrão — definido na base */
+}
+
+.btn--lg {
+  font-size: var(--text-body);
+  padding:   var(--space-3) var(--space-4);
+}
+
+
+/* --- Ícone de link externo ---------------------------------- */
+
+.btn__external {
+  font-size: 0.8em;
+  opacity:   0.7;
+}

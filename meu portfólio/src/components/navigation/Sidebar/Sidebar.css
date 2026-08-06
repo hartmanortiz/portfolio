@@ -1,0 +1,126 @@
+/* =============================================================
+   Sidebar
+   Painel lateral de conteúdo contextual.
+   Metadados, notas de processo, fichas técnicas.
+   ============================================================= */
+
+
+/* --- Base --------------------------------------------------- */
+
+.sidebar {
+  width: 100%;
+}
+
+/* No mobile: bloco inline separado por borda superior          */
+.sidebar__inner {
+  padding-top: var(--space-3);
+  border-top:  var(--border-thin) solid var(--color-border);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* No desktop: coluna lateral, borda lateral                    */
+@media (min-width: 1024px) {
+  .sidebar {
+    width: 16rem;
+    flex-shrink: 0;
+  }
+
+  .sidebar__inner {
+    padding-top:  0;
+    border-top:   none;
+    position:     sticky;
+    top:          var(--space-4);
+  }
+
+  .sidebar--right .sidebar__inner {
+    padding-left: var(--space-4);
+    border-left:  var(--border-thin) solid var(--color-border);
+  }
+
+  .sidebar--left .sidebar__inner {
+    padding-right: var(--space-4);
+    border-right:  var(--border-thin) solid var(--color-border);
+  }
+}
+
+
+/* =============================================================
+   Elementos internos do Sidebar
+   Classes utilitárias para uso dentro de <Sidebar>
+   ============================================================= */
+
+
+/* --- Grupo de metadados ------------------------------------- */
+
+.sidebar-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.sidebar-group + .sidebar-group {
+  padding-top:  var(--space-3);
+  border-top:   var(--border-thin) solid var(--color-border);
+  margin-top:   var(--space-1);
+}
+
+
+/* --- Rótulo ------------------------------------------------- */
+
+.sidebar-label {
+  font-family:   var(--font-interface);
+  font-size:     var(--text-meta);
+  font-weight:   var(--font-weight-medium);
+  color:         var(--color-text-subtle);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+
+/* --- Valor -------------------------------------------------- */
+
+.sidebar-value {
+  font-family:   var(--font-interface);
+  font-size:     var(--text-ui);
+  color:         var(--color-text);
+  line-height:   var(--leading-snug);
+}
+
+
+/* --- Nota de processo --------------------------------------- */
+/*
+  "Notas de Processo: pequenos blocos laterais onde reflexões,
+   decisões de projeto e curiosidades possam ser inseridas
+   sem interromper o texto principal."
+  — docs/02-design-system.md §29
+*/
+
+.sidebar-note {
+  background:  var(--color-surface-alt);
+  padding:     var(--space-3);
+  border-left: 2px solid var(--color-border-strong);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.sidebar-note__label {
+  font-family:   var(--font-interface);
+  font-size:     var(--text-meta);
+  font-weight:   var(--font-weight-medium);
+  color:         var(--color-text-subtle);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+.sidebar-note__text {
+  font-family: var(--font-editorial);
+  font-size:   var(--text-caption);
+  line-height: var(--leading-relaxed);
+  color:       var(--color-text-muted);
+  font-style:  italic;
+}

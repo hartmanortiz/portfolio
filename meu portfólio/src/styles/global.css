@@ -1,0 +1,144 @@
+/* =============================================================
+   GLOBAL — Portfólio Hartman Ortiz
+   
+   Ponto de entrada do sistema de estilos.
+   Importa todos os tokens e aplica reset base.
+   
+   Nunca escrever estilos de componente aqui.
+   ============================================================= */
+
+
+/* --- Tokens -------------------------------------------------- */
+@import "./tokens/colors.css";
+@import "./tokens/typography.css";
+@import "./tokens/spacing.css";
+@import "./tokens/borders.css";
+@import "./tokens/motion.css";
+@import "./tokens/breakpoints.css";
+
+
+/* --- Fontes (Google Fonts via @import ou <link> no head) ----- */
+/*
+  Declaradas via <link> no LayoutBase.astro para performance.
+  Não importar aqui — evita render-blocking.
+  
+  Fontes usadas:
+  - Playfair Display: 400, 400i, 700 (editorial)
+  - Inter: 400, 500, 600 (interface)
+*/
+
+
+/* --- Reset --------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* Suavização de scroll                                        */
+  scroll-behavior: smooth;
+
+  /* Antialiasing de fonte                                       */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Tamanho de fonte base — 1rem = 16px                         */
+  font-size: 100%;
+
+  /* Texto sem overflow horizontal                               */
+  overflow-x: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  font-family: var(--font-interface);
+  font-size: var(--text-body);
+  line-height: var(--leading-normal);
+  color: var(--color-text);
+  background-color: var(--color-paper);
+  min-height: 100dvh;
+}
+
+/* --- Tipografia Base ----------------------------------------- */
+
+h1, h2, h3, h4 {
+  font-family: var(--font-editorial);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-ink);
+}
+
+h1 { font-size: var(--text-h1); }
+h2 { font-size: var(--text-h2); }
+h3 { font-size: var(--text-h3); }
+h4 { font-size: var(--text-h4); }
+
+p {
+  max-width: var(--measure);
+  line-height: var(--leading-normal);
+}
+
+/* --- Links --------------------------------------------------- */
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-hover);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* --- Imagens ------------------------------------------------- */
+
+img, video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* --- Listas -------------------------------------------------- */
+
+ul, ol {
+  list-style: none;
+}
+
+/* --- Seleção de texto --------------------------------------- */
+
+::selection {
+  background-color: var(--color-ochre-light);
+  color: var(--color-ink);
+}
+
+/* --- Scrollbar (discreta) ----------------------------------- */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: var(--radius-full);
+}
