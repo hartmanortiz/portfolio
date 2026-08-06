@@ -24,7 +24,7 @@
 /* No desktop: coluna lateral, borda lateral                    */
 @media (min-width: 1024px) {
   .sidebar {
-    width: 16rem;
+    width: var(--sidebar-width-wide);
     flex-shrink: 0;
   }
 
@@ -101,7 +101,7 @@
 .sidebar-note {
   background:  var(--color-surface-alt);
   padding:     var(--space-3);
-  border-left: 2px solid var(--color-border-strong);
+  border-left: var(--border-medium) solid var(--color-border-strong);
 
   display: flex;
   flex-direction: column;

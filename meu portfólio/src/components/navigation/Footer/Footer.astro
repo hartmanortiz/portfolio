@@ -7,6 +7,7 @@
  * Fonte: docs/02-design-system.md — §15
  */
 
+import "./Footer.css"
 import type { FooterProps } from "./Footer.ts"
 
 const { lang } = Astro.props as FooterProps
@@ -37,7 +38,7 @@ const copy = {
 const t = copy[lang]
 ---
 
-<footer class="footer" role="contentinfo">
+<footer class="footer">
   <div class="footer__inner">
 
     <!-- Identidade e crédito -->

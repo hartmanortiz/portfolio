@@ -56,6 +56,9 @@
   --sidebar-width:        14rem;    /* 224px — estreito, discreto */
   --sidebar-width-wide:   16rem;    /* 256px */
 
+  /* Altura da barra de navegação inferior (mobile)              */
+  --nav-mobile-height:    3.5rem;   /* 56px (7 * 8px) — área WCAG */
+
   /* Gap do grid principal                                       */
   --grid-gap:             var(--space-3);    /* 24px */
   --grid-gap-lg:          var(--space-4);    /* 32px */

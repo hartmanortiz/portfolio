@@ -10,22 +10,24 @@
  * Renderiza <button> caso contrário.
  */
 
+import "./Button.css"
 import type { ButtonProps } from "./Button.ts"
 
 const {
-  variant = "default",
-  size    = "md",
+  variant  = "default",
+  size     = "md",
   href,
-  type    = "button",
+  type     = "button",
   disabled = false,
   label,
   external = false,
+  lang     = "pt",
 } = Astro.props as ButtonProps
 
-const Tag    = href ? "a" : "button"
-const cls    = `btn btn--${variant} btn--${size}`
-const target = external ? "_blank" : undefined
-const rel    = external ? "noopener noreferrer" : undefined
+const cls          = `btn btn--${variant} btn--${size}`
+const target       = external ? "_blank" : undefined
+const rel          = external ? "noopener noreferrer" : undefined
+const externalText = lang === "pt" ? `${label} (abre em nova aba)` : `${label} (opens in a new tab)`
 ---
 
 {href ? (
@@ -34,7 +36,7 @@ const rel    = external ? "noopener noreferrer" : undefined
     class={cls}
     target={target}
     rel={rel}
-    aria-label={external ? `${label} (abre em nova aba)` : undefined}
+    aria-label={external ? externalText : undefined}
   >
     <slot>{label}</slot>
     {external && <span class="btn__external" aria-hidden="true">↗</span>}
@@ -44,7 +46,6 @@ const rel    = external ? "noopener noreferrer" : undefined
     type={type}
     class={cls}
     disabled={disabled}
-    aria-disabled={disabled}
   >
     <slot>{label}</slot>
   </button>

@@ -13,10 +13,10 @@
   /* Papel: fundo principal — branco quente, levemente creme     */
   --color-paper:          hsl(40, 18%, 96%);
 
-  /* Tinta: preto principal — quente, nunca azulado              */
+  /* Tinta: preto editorial principal para títulos e destaques   */
   --color-ink:            hsl(30, 8%, 10%);
 
-  /* Grafite: cinza médio para texto secundário e divisores      */
+  /* Grafite: base para elementos secundários                    */
   --color-graphite:       hsl(30, 5%, 38%);
 
   /* Marrom profundo: para ênfase e variação tonal               */
@@ -40,14 +40,14 @@
 
   /* --- Texto ------------------------------------------------- */
 
-  /* Texto principal — tinta quente                              */
-  --color-text:           hsl(30, 8%, 10%);
+  /* Texto principal de leitura — quente, suave para leitura     */
+  --color-text:           hsl(30, 8%, 18%);
 
   /* Texto secundário — grafite                                  */
-  --color-text-muted:     hsl(30, 5%, 42%);
+  --color-text-muted:     var(--color-graphite);
 
   /* Texto de legendas, metadados, notas — muito discreto        */
-  --color-text-subtle:    hsl(30, 5%, 58%);
+  --color-text-subtle:    hsl(30, 5%, 56%);
 
   /* Texto sobre fundos escuros                                  */
   --color-text-inverse:   hsl(40, 18%, 96%);

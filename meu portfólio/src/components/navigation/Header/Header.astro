@@ -10,6 +10,7 @@
  *        decisions/ADR-003-navigation.md
  */
 
+import "./Header.css"
 import type { HeaderProps, NavLink } from "./Header.ts"
 
 const { lang, currentPath } = Astro.props as HeaderProps
@@ -30,9 +31,22 @@ const navEn: NavLink[] = navPt.map((link) => ({
   href:  `/en${link.href}`,
 }))
 
-const nav   = lang === "pt" ? navPt : navEn
-const altLang = lang === "pt" ? "en" : "pt"
-const altHref = lang === "pt" ? `/en${currentPath}` : currentPath.replace(/^\/en/, "") || "/"
+const mobileNavPt: NavLink[] = [
+  { label: "Início",     href: "/",           labelEn: "Home" },
+  { label: "Arquivo",    href: "/arquivo/",   labelEn: "Archive" },
+  { label: "Sobre",      href: "/sobre/",     labelEn: "About" },
+  { label: "Contato",    href: "/contato/",   labelEn: "Contact" },
+]
+
+const mobileNavEn: NavLink[] = mobileNavPt.map((link) => ({
+  label: link.labelEn ?? link.label,
+  href:  `/en${link.href}`,
+}))
+
+const nav       = lang === "pt" ? navPt : navEn
+const mobileNav = lang === "pt" ? mobileNavPt : mobileNavEn
+const altLang   = lang === "pt" ? "en" : "pt"
+const altHref   = lang === "pt" ? `/en${currentPath}` : currentPath.replace(/^\/en/, "") || "/"
 
 function isActive(href: string): boolean {
   if (href === "/" || href === "/en/") return currentPath === href
@@ -41,18 +55,22 @@ function isActive(href: string): boolean {
 ---
 
 <!-- Desktop: sidebar lateral -->
-<header class="header" role="banner">
+<header class="header">
   <nav class="header__nav" aria-label={lang === "pt" ? "Navegação principal" : "Main navigation"}>
 
     <!-- Identidade -->
-    <a href={lang === "pt" ? "/" : "/en/"} class="header__identity" aria-label="Hartman Ortiz — início">
+    <a
+      href={lang === "pt" ? "/" : "/en/"}
+      class="header__identity"
+      aria-label={lang === "pt" ? "Hartman Ortiz — início" : "Hartman Ortiz — home"}
+    >
       <span class="header__name">Hartman Ortiz</span>
       <span class="header__role" aria-hidden="true">
         {lang === "pt" ? "Direção de Arte" : "Art Direction"}
       </span>
     </a>
 
-    <!-- Links -->
+    <!-- Links desktop -->
     <ul class="header__list" role="list">
       {nav.map((link) => (
         <li class="header__item">
@@ -82,3 +100,31 @@ function isActive(href: string): boolean {
 
   </nav>
 </header>
+
+<!-- Mobile: barra de navegação inferior -->
+<nav class="header-mobile" aria-label={lang === "pt" ? "Navegação rápida mobile" : "Mobile quick navigation"}>
+  <ul class="header-mobile__list" role="list">
+    {mobileNav.map((link) => (
+      <li class="header-mobile__item">
+        <a
+          href={link.href}
+          class={`header-mobile__link${isActive(link.href) ? " header-mobile__link--active" : ""}`}
+          aria-current={isActive(link.href) ? "page" : undefined}
+        >
+          <span>{link.label}</span>
+        </a>
+      </li>
+    ))}
+    <li class="header-mobile__item">
+      <a
+        href={altHref}
+        class="header-mobile__link"
+        hreflang={altLang}
+        lang={altLang}
+        aria-label={lang === "pt" ? "View in English" : "Ver em Português"}
+      >
+        <span>{altLang === "en" ? "EN" : "PT"}</span>
+      </a>
+    </li>
+  </ul>
+</nav>

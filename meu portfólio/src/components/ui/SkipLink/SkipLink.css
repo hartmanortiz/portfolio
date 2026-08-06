@@ -1,0 +1,29 @@
+/* =============================================================
+   SkipLink
+   Permite que usuários de teclado saltem a navegação
+   diretamente para o conteúdo principal.
+   ============================================================= */
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: var(--space-2);
+  z-index: 1000;
+
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-interface);
+  font-size: var(--text-ui);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  border-radius: var(--radius-base);
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  top: var(--space-2);
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}

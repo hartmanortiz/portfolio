@@ -45,7 +45,6 @@
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
-  font-size: calc(var(--text-meta) * 1.1);  /* sempre compacto */
 }
 
 

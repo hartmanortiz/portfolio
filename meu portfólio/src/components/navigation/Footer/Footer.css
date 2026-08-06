@@ -7,8 +7,8 @@
   border-top: var(--border-thin) solid var(--color-border);
   margin-top: var(--space-4xl);
 
-  /* No mobile, garante espaço acima da barra inferior de nav    */
-  padding-bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0));
+  /* No mobile, garante respiro seguro acima da barra de nav      */
+  padding-bottom: calc(var(--nav-mobile-height) + var(--space-3) + env(safe-area-inset-bottom, 0));
 }
 
 @media (min-width: 1024px) {
@@ -84,12 +84,6 @@
   color: var(--color-ink);
 }
 
-.footer__link:focus-visible {
-  outline:        2px solid var(--color-focus);
-  outline-offset: 2px;
-  border-radius:  var(--radius-sm);
-}
-
 
 /* --- Meta --------------------------------------------------- */
 
@@ -112,12 +106,6 @@
 
 .footer__lang:hover {
   color: var(--color-ink);
-}
-
-.footer__lang:focus-visible {
-  outline:        2px solid var(--color-focus);
-  outline-offset: 2px;
-  border-radius:  var(--radius-sm);
 }
 
 .footer__rights {
